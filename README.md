@@ -20,7 +20,5 @@ Bu proje, UEFA Şampiyonlar Ligi formatını baz alarak geliştirilmiş, tamamen
 * Modern JavaScript (ES6+)
 * HTML5 Canvas API
 
-
-
 ---
 *Geliştirici: nalkapon*

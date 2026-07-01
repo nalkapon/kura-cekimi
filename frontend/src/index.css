@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #020b2b;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* ── Top navigation ── */
+
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(2, 11, 43, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.18);
+}
+
+.app-nav .max-w-7xl {
+  flex-wrap: wrap;
+  row-gap: 12px;
+}
+
+.app-brand-ball {
+  line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.35));
+}
+
+.app-brand-title {
+  background: linear-gradient(135deg, #fff 0%, #bfdbfe 55%, #818cf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+.app-cl-logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.9;
+  margin-left: 4px;
+}
+
+.app-nav-links {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.app-link {
+  color: #93c5fd;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.app-link:hover {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+.app-link.active {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.35);
+}
+
+@media (max-width: 900px) {
+  .app-nav .max-w-7xl {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .app-nav-links {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+  }
+
+  .app-cl-logo {
+    display: none;
+  }
+}

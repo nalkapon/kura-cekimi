@@ -1,0 +1,326 @@
+[
+  {
+    "id": 1,
+    "name": "Bayern München",
+    "country": "DE",
+    "pot": 1,
+    "coefficient": 147.5,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 2,
+    "name": "Real Madrid",
+    "country": "ES",
+    "pot": 1,
+    "coefficient": 144.5,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 3,
+    "name": "Paris Saint-Germain",
+    "country": "FR",
+    "pot": 1,
+    "coefficient": 132.0,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 4,
+    "name": "Liverpool",
+    "country": "EN",
+    "pot": 1,
+    "coefficient": 130.0,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 5,
+    "name": "Internazionale",
+    "country": "IT",
+    "pot": 1,
+    "coefficient": 127.0,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 6,
+    "name": "Manchester City",
+    "country": "EN",
+    "pot": 1,
+    "coefficient": 125.5,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 7,
+    "name": "Arsenal",
+    "country": "EN",
+    "pot": 1,
+    "coefficient": 119.0,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 8,
+    "name": "FC Barcelona",
+    "country": "ES",
+    "pot": 1,
+    "coefficient": 113.25,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 9,
+    "name": "Atlético Madrid",
+    "country": "ES",
+    "pot": 1,
+    "coefficient": 104.75,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 10,
+    "name": "Borussia Dortmund",
+    "country": "DE",
+    "pot": 2,
+    "coefficient": 100.75,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 11,
+    "name": "AS Roma",
+    "country": "IT",
+    "pot": 2,
+    "coefficient": 97.75,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 12,
+    "name": "Benfica",
+    "country": "PT",
+    "pot": 2,
+    "coefficient": 90.0,
+    "path": "league",
+    "qualified": false
+  },
+  {
+    "id": 13,
+    "name": "Sporting CP",
+    "country": "PT",
+    "pot": 2,
+    "coefficient": 84.0,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 14,
+    "name": "Aston Villa",
+    "country": "EN",
+    "pot": 2,
+    "coefficient": 83.0,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 15,
+    "name": "FC Porto",
+    "country": "PT",
+    "pot": 2,
+    "coefficient": 80.75,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 16,
+    "name": "Manchester United",
+    "country": "EN",
+    "pot": 2,
+    "coefficient": 76.5,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 17,
+    "name": "Club Brugge",
+    "country": "BE",
+    "pot": 2,
+    "coefficient": 75.25,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 18,
+    "name": "Real Betis",
+    "country": "ES",
+    "pot": 2,
+    "coefficient": 74.5,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 19,
+    "name": "PSV Eindhoven",
+    "country": "NL",
+    "pot": 3,
+    "coefficient": 71.25,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 20,
+    "name": "Feyenoord",
+    "country": "NL",
+    "pot": 3,
+    "coefficient": 71.0,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 21,
+    "name": "Lille OSC",
+    "country": "FR",
+    "pot": 3,
+    "coefficient": 68.75,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 22,
+    "name": "Bodø/Glimt",
+    "country": "NO",
+    "pot": 3,
+    "coefficient": 64.0,
+    "path": "league",
+    "qualified": false
+  },
+  {
+    "id": 23,
+    "name": "Napoli",
+    "country": "IT",
+    "pot": 3,
+    "coefficient": 63.0,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 24,
+    "name": "RB Leipzig",
+    "country": "DE",
+    "pot": 3,
+    "coefficient": 61.0,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 25,
+    "name": "Villarreal",
+    "country": "ES",
+    "pot": 3,
+    "coefficient": 59.0,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 26,
+    "name": "Shakhtar Donetsk",
+    "country": "UA",
+    "pot": 3,
+    "coefficient": 56.25,
+    "path": "champions",
+    "qualified": true
+  },
+  {
+    "id": 27,
+    "name": "Galatasaray",
+    "country": "TR",
+    "pot": 3,
+    "coefficient": 53.5,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 28,
+    "name": "Kızılyıldız",
+    "country": "RS",
+    "pot": 4,
+    "coefficient": 46.5,
+    "path": "league",
+    "qualified": false
+  },
+  {
+    "id": 29,
+    "name": "Dinamo Zagreb",
+    "country": "HR",
+    "pot": 4,
+    "coefficient": 46.5,
+    "path": "league",
+    "qualified": false
+  },
+  {
+    "id": 30,
+    "name": "RB Salzburg",
+    "country": "AT",
+    "pot": 4,
+    "coefficient": 45.0,
+    "path": "league",
+    "qualified": false
+  },
+  {
+    "id": 31,
+    "name": "Slavia Prague",
+    "country": "CZ",
+    "pot": 4,
+    "coefficient": 44.0,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 32,
+    "name": "Sparta Prag",
+    "country": "CZ",
+    "pot": 4,
+    "coefficient": 38.25,
+    "path": "league",
+    "qualified": false
+  },
+  {
+    "id": 33,
+    "name": "Young Boys",
+    "country": "CH",
+    "pot": 4,
+    "coefficient": 29.5,
+    "path": "league",
+    "qualified": false
+  },
+  {
+    "id": 34,
+    "name": "VfB Stuttgart",
+    "country": "DE",
+    "pot": 4,
+    "coefficient": 27.5,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 35,
+    "name": "RC Lens",
+    "country": "FR",
+    "pot": 4,
+    "coefficient": 16.699,
+    "path": "league",
+    "qualified": true
+  },
+  {
+    "id": 36,
+    "name": "Como",
+    "country": "IT",
+    "pot": 4,
+    "coefficient": 0.0,
+    "path": "league",
+    "qualified": true
+  }
+]

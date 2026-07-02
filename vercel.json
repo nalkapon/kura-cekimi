@@ -1,0 +1,14 @@
+{
+  "services": {
+    "frontend": {
+      "root": "frontend",
+      "framework": "vite"
+    },
+    "backend": {
+      "root": ".",
+      "routes": [
+        { "src": "/api/(.*)", "dest": "/api/$1" }
+      ]
+    }
+  }
+}

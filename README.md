@@ -35,3 +35,18 @@ Aşağıdaki adımlar ile projeyi Render üzerinde kolayca yayınlayabilirsiniz:
 4. Backend URL hazır olduktan sonra `VITE_API_BASE` ve `ALLOWED_ORIGIN` ortam değişkenlerini Render panelinden ayarlayın.
 
 Bu depoya yaptığım değişiklikleri commit edip GitHub'a pushladım; isterseniz ben Render tarafındaki adımları da sizin adınıza yürütme konusunda rehberlik edebilirim (Render hesabı erişimi gerektirir).
+
+## Otomatik Dağıtım (CI)
+
+- Frontend için otomatik dağıtım: `main` branch'e push olduğunda `gh-pages` dalına `frontend/dist` içeriğini gönderen bir GitHub Action ekledim (`.github/workflows/deploy-frontend-gh-pages.yml`). GitHub Pages ile kolayca canlı hale getirebilirsiniz.
+- Backend için Render tetikleyici: `.github/workflows/deploy-backend-render.yml` dosyası, backend değişikliklerinde veya manuel tetiklemede Render API üzerinden deploy çağrısı yapacak. Bu iş akışının çalışması için GitHub Secrets içinde `RENDER_API_KEY` ve `RENDER_SERVICE_ID_BACKEND` eklemeniz gerekiyor.
+
+### Yapmanız gereken kısa adımlar
+
+1. GitHub repo -> Settings -> Secrets & variables -> Actions ekleyin:
+	- `RENDER_API_KEY` = Render account API key (Panel -> Account -> API Keys)
+	- `RENDER_SERVICE_ID_BACKEND` = Render backend service ID (hizmeti oluşturduktan sonra panelden alın)
+2. Repository ayarlarından GitHub Pages'i `gh-pages` branch'i ile etkinleştirin (veya action tarafından otomatik oluşturulacak).
+3. Backend için Render üzerinde bir Web Service oluşturun (veya `render.yaml` kullanın). Backend hazır olduktan sonra `RENDER_SERVICE_ID_BACKEND` secret'ını ekleyin ve GitHub Actions -> deploy-backend-render workflow'unu manuel çalıştırın.
+
+İsterseniz tüm bu adımlarda sizi yönlendirebilirim veya Render hesabına erişim verecek şekilde izin verirseniz (veya Render API Key paylaşırsanız) ben bunları sizin adınıza tamamlayabilirim.

@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: process.env.ALLOWED_ORIGIN || '*' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -31,6 +31,7 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`✓ Backend sunucusu çalışıyor: http://localhost:${PORT}`);
   console.log(`✓ Draw API (Swiss): POST http://localhost:${PORT}/api/draw/swiss`);
+  console.log(`✓ Config: PORT=${PORT}, ALLOWED_ORIGIN=${process.env.ALLOWED_ORIGIN || '*'} `);
   // Bracket API removed (legacy 32-team bracket)
   // Playoff API removed
 });

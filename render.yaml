@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: kura-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    root: backend
+    envVars:
+      - key: ALLOWED_ORIGIN
+        value: ""
+  - type: static
+    name: kura-frontend
+    env: static
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    publishPath: frontend/dist
+    root: frontend
+    envVars:
+      - key: VITE_API_BASE
+        value: ""

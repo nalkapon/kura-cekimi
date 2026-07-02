@@ -20,8 +20,7 @@ Bu proje, UEFA Şampiyonlar Ligi formatını baz alarak geliştirilmiş, tamamen
 * Modern JavaScript (ES6+)
 * HTML5 Canvas API
 
-## ⚠️ Yasal Uyarı
-Bu uygulama tamamen taraftar yapımı bir simülasyon projesidir. UEFA, Şampiyonlar Ligi veya listelenen futbol kulüpleriyle hiçbir resmi bağı bulunmamaktadır. Tüm logolar ve marka isimleri ilgili hak sahiplerine aittir. Yalnızca eğitim ve eğlence amacıyla kullanılmıştır.
+
 
 ---
 *Geliştirici: nalkapon*

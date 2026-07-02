@@ -1,31 +1,24 @@
-import axios from 'axios';
+import { swissSystemDraw } from '../lib/draw';
+import { TEAMS_36 } from '../data/teams';
 
-// Use Vite env variable when deployed; fallback to localhost for local dev
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
-
-const api = axios.create({
-  baseURL: API_BASE,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-// Draw API
+/**
+ * Draw API — Tarayıcıda çalışan kura
+ * Backend bağımlılığı yok; hepsi pure JavaScript
+ */
 export const drawAPI = {
   swiss: async () => {
-    const response = await api.post('/draw/swiss');
-    return response.data;
+    // Künstliche gecikme — UI'da "yükleniyor" gösterebilmek için
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return swissSystemDraw(TEAMS_36);
   },
   getResult: async () => {
-    const response = await api.get('/draw/result');
-    return response.data;
+    // Eğer daha önceki sonucu saklıyorsanız, localStorage'dan döndürün
+    const stored = localStorage.getItem('lastDrawResult');
+    if (stored) {
+      return JSON.parse(stored);
+    }
+    throw new Error('Henüz kura çekilmedi');
   },
 };
 
-// Playoff API
-// Playoff API removed (legacy)
-
-// Bracket API
-// Bracket API removed (legacy 32-team)
-
-export default api;
+export default drawAPI;

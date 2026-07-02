@@ -1,14 +1,6 @@
 {
-  "services": {
-    "frontend": {
-      "root": "frontend",
-      "framework": "vite"
-    },
-    "backend": {
-      "root": ".",
-      "routes": [
-        { "src": "/api/(.*)", "dest": "/api/$1" }
-      ]
-    }
-  }
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "npm install"
 }
+

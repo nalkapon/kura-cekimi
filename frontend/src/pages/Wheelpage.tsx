@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 
 const SEGMENT_COLORS = ['#fbbf24', '#38bdf8', '#34d399', '#a78bfa', '#f472b6', '#fb923c'];
 
-function pickTextColor(bg: string) {
+function pickTextColor() {
   return '#0a0a12';
 }
 
@@ -160,7 +160,7 @@ export default function WheelPage() {
                     }}>
                       <span style={{
                         marginLeft: 14, fontSize: options.length > 12 ? 10 : 13, fontWeight: 800,
-                        color: pickTextColor(SEGMENT_COLORS[i % SEGMENT_COLORS.length]),
+                        color: pickTextColor(),
                         maxWidth: 90, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                       }}>{opt}</span>
                     </div>

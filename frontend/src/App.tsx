@@ -10,7 +10,6 @@ import CardDrawPage from './pages/CardDrawPage';
 import TombalaPage from './pages/Tombalapage';
 import HaliSahaTeamBuilderPage from './pages/HaliSahaTeamBuilderPage';
 import VampirKoyluPage from './pages/VampirKoyluPage';
-import KaziKazanPage from './pages/KaziKazanPage';
 import './App.css';
 // BracketPage (32-team legacy) removed
 

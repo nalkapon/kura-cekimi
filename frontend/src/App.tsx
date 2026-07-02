@@ -27,11 +27,7 @@ function App() {
             <NavLink to="/" className="flex items-center gap-3" style={{ textDecoration: 'none' }}>
               <span className="text-3xl app-brand-ball">⚽</span>
               <h1 className="text-xl font-black tracking-wide app-brand-title">Kura Simülatörü</h1>
-              <img
-                src="frontend/public/logos/uefa_champions_league-logo_brandlogos.net_swjss.png"
-                alt="UEFA Champions League"
-                className="app-cl-logo"
-              />
+            
             </NavLink>
             <div className="flex gap-6 app-nav-links">
               <NavLink to="/" end className={navLinkClass}>🏠 Ana Sayfa</NavLink>
@@ -45,7 +41,7 @@ function App() {
               <NavLink to="/tombala" className={navLinkClass}>🎱 Tombala</NavLink>
               <NavLink to="/hali-saha" className={navLinkClass}>👥 Hali Saha</NavLink>
               <NavLink to="/vampir-koylu" className={navLinkClass}>🦇 Vampir Koylu</NavLink>
-              <NavLink to="/kazi-kazan" className={navLinkClass}>🪙 Kazi Kazan</NavLink>
+              {/*<NavLink to="/kazi-kazan" className={navLinkClass}>🪙 Kazi Kazan</NavLink> */}
               {/* Bracket/Dünya Kupası removed (legacy 32-team) */}
             </div>
           </div>
@@ -68,7 +64,7 @@ function App() {
           <Route path="/tombala" element={<TombalaPage />} />
           <Route path="/hali-saha" element={<HaliSahaTeamBuilderPage />} />
           <Route path="/vampir-koylu" element={<VampirKoyluPage />} />
-          <Route path="/kazi-kazan" element={<KaziKazanPage />} />
+          {/*<Route path="/kazi-kazan" element={<KaziKazanPage />} /> */}
 
           {/* Eski linkler kırılmasın diye yönlendirme */}
           <Route path="/draw" element={<Navigate to="/sampiyonlar-ligi/takim" replace />} />

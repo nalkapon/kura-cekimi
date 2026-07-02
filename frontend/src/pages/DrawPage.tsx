@@ -1,45 +1,19 @@
 import { useEffect, useState } from 'react';
 import { drawAPI } from '../services/api';
+import { GB, DE, ES, FR, IT, PT, TR, BE, NL, HR, CZ, RS, NO, UA, AT, CH, PL, SK} from 'country-flag-icons/react/3x2';
 
-const TEAM_LOGOS: Record<string, string> = {
-  'Manchester City': '/logos/manchester-city-fc-logo.png',
-  'Bayern München': '/logos/fc-bayern-munich-logo.png',
-  'Real Madrid': '/logos/real_madrid_cf-brandlogo.net.png',
-  'Paris Saint-Germain': '/logos/paris_saint-germain_gradients-logo_brandlogos.net_gileg.png',
-  'Liverpool': '/logos/liverpool_football_club-logo_brandlogos.net_vfw8i.png',
-  'Internazionale': '/logos/inter-milan-logo.png',
-  'Borussia Dortmund': '/logos/borussia_dortmund-logo_brandlogos.net_etcsv.png',
-  'RB Leipzig': '/logos/rb_leipzig-logo_brandlogos.net_vnr8y.png',
-  'FC Barcelona': '/logos/fc_barcelona-logo.png',
-  'Atlético Madrid': '/logos/atletico_madrid_1970-2016-logo_brandlogos.net_qkajc.png',
-  'Napoli': '/logos/ssc-napoli-vector-logo.png',
-  'Benfica': '/logos/sl_benfica-logo_brandlogos.net_luvkq.png',
-  'FC Porto': '/logos/fc_porto-logo_brandlogos.net_gcyc8.png',
-  'Arsenal': '/logos/arsenal_fc-logo_brandlogos.net_kae1j.png',
-  'Villarreal': '/logos/villareal-c-de-f-vector-logo.png',
-  'Manchester United': '/logos/manchester_united_f.c.-logo_brandlogos.net_uw5rg.png',
-  'AS Roma': '/logos/as-roma-logo-vector.png',
-  'Shakhtar Donetsk': '/logos/fc_shakhtar_donetsk-logo_brandlogos.net_sn7wh.png',
-  'Club Brugge': '/logos/club_brugge_kv-logo_brandlogos.net_d7kl0.png',
-  'RB Salzburg': '/logos/fc_red_bull_salzburg-logo_brandlogos.net_2si1z.png',
-  'PSV Eindhoven': '/logos/psv-eindhoven-logo.png',
-  'Sporting CP': '/logos/sporting-cp-logo.png',
-  'Dinamo Zagreb': '/logos/dinamo_zagreb-logo_brandlogos.net_bzutz.png',
-  'Feyenoord': '/logos/feyenoord_rotterdam-logo_brandlogos.net_v3wyd.png',
-  'Slavia Prague': '/logos/sk-slavia-praha-vector-logo.png',
-  'Kızılyıldız': '/logos/fc_crvena_zvezda-logo_brandlogos.net_fzq5r.png',
-  'Lille OSC': '/logos/lille-osc-logo.png',
-  'Galatasaray': '/logos/galatasaray-logo-vector.png',
-  'Aston Villa': '/logos/aston-villa-logo.png',
-  'VfB Stuttgart': '/logos/vfb_stuttgart-logo_brandlogos.net_9xh8z.png',
-  'Real Betis': '/logos/real_betis-logo_brandlogos.net_5i9f8.png',
-  'RC Lens': '/logos/rc-lens-logo.png',
-  'Young Boys': '/logos/bsc_young_boys-logo_brandlogos.net_9vqjx.png',
-  'Sparta Prag': '/logos/ac_sparta_prague-logo_brandlogos.net_32uiq.png',
-  'Bodø/Glimt': '/logos/fk_bodo_glimt-logo_brandlogos.net_wcnbr.png',
-  'Como': '/logos/como_1907-logo_brandlogos.net_ehxi8.png',
+
+const COUNTRY_FLAGS: Record<string, any> = {
+  EN: GB, DE: DE, ES: ES, FR: FR, IT: IT,
+  PT: PT, TR: TR, BE: BE, NL: NL,
+  HR: HR, CZ: CZ, RS: RS, NO: NO,
+  UA: UA, AT: AT, CH: CH, PL:PL, GB:GB , SK:SK
 };
-
+function resolveFlag(countryName?: string, width = 24, height = 16) {
+  if (!countryName || !COUNTRY_FLAGS[countryName]) return null;
+  const FlagComponent = COUNTRY_FLAGS[countryName];
+  return <FlagComponent style={{ width, height, borderRadius: '3px', objectFit: 'cover', flexShrink: 0 }} />;
+}
 interface Team {
   id?: number;
   name?: string;
@@ -88,10 +62,7 @@ export default function DrawPage() {
     setSimulationMode(true);
   };
 
-  function resolveLogo(team?: Team) {
-    if (!team?.name) return undefined;
-    return TEAM_LOGOS[team.name] ?? undefined;
-  }
+
 
   const qualifiedTeams = result?.teams.filter((t: Team) => t.qualified) || [];
   const qualifyingTeams = result?.teams.filter((t: Team) => !t.qualified) || [];
@@ -216,11 +187,7 @@ export default function DrawPage() {
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
                 <div style={{ width: 112, height: 112, borderRadius: '16px', overflow: 'hidden', background: selectedTeam.color || '#1e3a8a', border: '2px solid rgba(255,255,255,0.15)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px -4px rgba(0,0,0,0.5)' }}>
-                  {resolveLogo(selectedTeam) && (
-                    <img src={resolveLogo(selectedTeam) as string} alt={selectedTeam.name}
-                      style={{ width: 96, height: 96, objectFit: 'contain' }}
-                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
-                  )}
+                  {resolveFlag(selectedTeam.country, 84, 56)}
                 </div>
                 <div>
                   <h2 style={{ fontSize: 'clamp(1.8rem,4vw,3.25rem)', fontWeight: 900, color: '#fff', lineHeight: 1.1, margin: '0 0 0.5rem' }}>{selectedTeam.name}</h2>
@@ -262,9 +229,7 @@ export default function DrawPage() {
                               <span style={{ fontSize: '0.63rem', color: '#475569' }}>C:{match.opponent?.coefficient}</span>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                              {resolveLogo(match.opponent)
-                                ? <img src={resolveLogo(match.opponent)} alt={match.opponent?.name} style={{ width: 20, height: 20, objectFit: 'contain', flexShrink: 0 }} />
-                                : <div style={{ width: 20, height: 20, borderRadius: '50%', background: '#1e293b', flexShrink: 0 }} />}
+                              {resolveFlag(match.opponent?.country, 22, 15) || <div style={{ width: 22, height: 15, borderRadius: '3px', background: '#1e293b', flexShrink: 0 }} />}
                               <div style={{ minWidth: 0 }}>
                                 <div style={{ color: '#e2e8f0', fontSize: '0.83rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{match.opponent?.name}</div>
                                 <div style={{ color: '#475569', fontSize: '0.68rem' }}>{match.opponent?.country}</div>
@@ -312,9 +277,7 @@ export default function DrawPage() {
                           onMouseEnter={e => { const el = e.currentTarget as HTMLButtonElement; el.style.background = `rgba(${pc.hover},0.13)`; el.style.borderColor = pc.border; }}
                           onMouseLeave={e => { const el = e.currentTarget as HTMLButtonElement; el.style.background = 'rgba(255,255,255,0.04)'; el.style.borderColor = 'rgba(255,255,255,0.07)'; }}
                         >
-                          {resolveLogo(team)
-                            ? <img src={resolveLogo(team)} alt={team.name} style={{ width: 22, height: 22, objectFit: 'contain', flexShrink: 0 }} />
-                            : <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#1e293b', flexShrink: 0 }} />}
+                           {resolveFlag(team.country, 24, 16) || <div style={{ width: 24, height: 16, borderRadius: '3px', background: '#1e293b', flexShrink: 0 }} />}
                           <div style={{ minWidth: 0, flex: 1 }}>
                             <div style={{ color: '#f1f5f9', fontSize: '0.82rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{team.name}</div>
                             <div style={{ fontSize: '0.67rem', marginTop: '2px' }}>

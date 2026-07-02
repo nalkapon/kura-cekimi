@@ -85,15 +85,7 @@ const GENERAL_TOOLS: ToolCard[] = [
     border: 'rgba(192,132,252,0.3)',
     glow: 'rgba(192,132,252,0.18)',
   },
-  {
-    to: '/kazi-kazan',
-    emoji: '🪙',
-    title: 'Kazi Kazan',
-    description: 'Ust katmani kaziyarak gizli sonucu ac; %60 kaziyinca kart tamamlanir.',
-    accent: '#2dd4bf',
-    border: 'rgba(45,212,191,0.3)',
-    glow: 'rgba(45,212,191,0.18)',
-  },
+ 
 ];
 
 function ToolCardItem({ tool }: { tool: ToolCard }) {

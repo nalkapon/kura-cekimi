@@ -1,45 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { drawAPI } from '../services/api';
+import { GB, DE, ES, FR, IT, PT, TR, BE, NL, HR, CZ, RS, NO, UA, AT, CH, PL, SK} from 'country-flag-icons/react/3x2';
 
-const TEAM_LOGOS: Record<string, string> = {
-  'Manchester City': '/logos/manchester-city-fc-logo.png',
-  'Bayern München': '/logos/fc-bayern-munich-logo.png',
-  'Real Madrid': '/logos/real_madrid_cf-brandlogo.net.png',
-  'Paris Saint-Germain': '/logos/paris_saint-germain_gradients-logo_brandlogos.net_gileg.png',
-  'Liverpool': '/logos/liverpool_football_club-logo_brandlogos.net_vfw8i.png',
-  'Internazionale': '/logos/inter-milan-logo.png',
-  'Borussia Dortmund': '/logos/borussia_dortmund-logo_brandlogos.net_etcsv.png',
-  'RB Leipzig': '/logos/rb_leipzig-logo_brandlogos.net_vnr8y.png',
-  'FC Barcelona': '/logos/fc_barcelona-logo.png',
-  'Atlético Madrid': '/logos/atletico_madrid_1970-2016-logo_brandlogos.net_qkajc.png',
-  'Napoli': '/logos/ssc-napoli-vector-logo.png',
-  'Benfica': '/logos/sl_benfica-logo_brandlogos.net_luvkq.png',
-  'FC Porto': '/logos/fc_porto-logo_brandlogos.net_gcyc8.png',
-  'Arsenal': '/logos/arsenal_fc-logo_brandlogos.net_kae1j.png',
-  'Villarreal': '/logos/villareal-c-de-f-vector-logo.png',
-  'Manchester United': '/logos/manchester_united_f.c.-logo_brandlogos.net_uw5rg.png',
-  'AS Roma': '/logos/as-roma-logo-vector.png',
-  'Shakhtar Donetsk': '/logos/fc_shakhtar_donetsk-logo_brandlogos.net_sn7wh.png',
-  'Club Brugge': '/logos/club_brugge_kv-logo_brandlogos.net_d7kl0.png',
-  'RB Salzburg': '/logos/fc_red_bull_salzburg-logo_brandlogos.net_2si1z.png',
-  'PSV Eindhoven': '/logos/psv-eindhoven-logo.png',
-  'Sporting CP': '/logos/sporting-cp-logo.png',
-  'Dinamo Zagreb': '/logos/dinamo_zagreb-logo_brandlogos.net_bzutz.png',
-  'Feyenoord': '/logos/feyenoord_rotterdam-logo_brandlogos.net_v3wyd.png',
-  'Slavia Prague': '/logos/sk-slavia-praha-vector-logo.png',
-  'Kızılyıldız': '/logos/fc_crvena_zvezda-logo_brandlogos.net_fzq5r.png',
-  'Lille OSC': '/logos/lille-osc-logo.png',
-  'Galatasaray': '/logos/galatasaray-logo-vector.png',
-  'Aston Villa': '/logos/aston-villa-logo.png',
-  'VfB Stuttgart': '/logos/vfb_stuttgart-logo_brandlogos.net_9xh8z.png',
-  'Real Betis': '/logos/real_betis-logo_brandlogos.net_5i9f8.png',
-  'RC Lens': '/logos/rc-lens-logo.png',
-  'Young Boys': '/logos/bsc_young_boys-logo_brandlogos.net_9vqjx.png',
-  'Sparta Prag': '/logos/ac_sparta_prague-logo_brandlogos.net_32uiq.png',
-  'Bodø/Glimt': '/logos/fk_bodo_glimt-logo_brandlogos.net_wcnbr.png',
-  'Como': '/logos/como_1907-logo_brandlogos.net_ehxi8.png',
+
+const COUNTRY_FLAGS: Record<string, any> = {
+  EN: GB, DE: DE, ES: ES, FR: FR, IT: IT,
+  PT: PT, TR: TR, BE: BE, NL: NL,
+  HR: HR, CZ: CZ, RS: RS, NO: NO,
+  UA: UA, AT: AT, CH: CH, PL:PL, GB:GB , SK:SK
 };
-
 interface Team {
   id: number;
   name: string;
@@ -71,11 +40,13 @@ function flattenSchedule(schedule?: Record<string, ScheduleEntry[]>): ScheduleEn
   return out;
 }
 
-function resolveLogo(team?: Team) {
-  if (!team?.name) return undefined;
-  return TEAM_LOGOS[team.name] ?? undefined;
-}
 
+
+function resolveFlag(countryName?: string, width = 24, height = 16) {
+   if (!countryName || !COUNTRY_FLAGS[countryName]) return null;
+   const FlagComponent = COUNTRY_FLAGS[countryName];
+  return <FlagComponent style={{ width, height, borderRadius: '3px', objectFit: 'cover', flexShrink: 0 }} />;
+ }
 // Fisher-Yates: torba içindeki topların DİZİLİŞİNİ (pozisyonunu) gerçek kura gibi karıştırır,
 // böylece "1. pozisyon hep Bayern" gibi ezbere bilinen bir sıra oluşmaz.
 function shuffle<T>(arr: T[]): T[] {
@@ -262,7 +233,7 @@ export default function DrawAllPage() {
               <div style={{ width: `${Math.round((drawnIds.length / totalTeams) * 100)}%`, height: '100%', background: 'linear-gradient(90deg,#fbbf24,#8b5cf6)', transition: 'width .3s' }} />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(360px, 1fr) 1.4fr', gap: '1.5rem', alignItems: 'start' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(420px, 1.3fr) 1fr', gap: '1.5rem', alignItems: 'start' }}>
 
               {/* Pot bowls with clickable balls */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
@@ -294,18 +265,18 @@ export default function DrawAllPage() {
                                 title={team.name}
                                 onClick={() => setDrawingViewedTeamId(team.id)}
                                 style={{
-                                width: 60, height: 60, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                width: '100%', minHeight: 64, borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4,
                                 background: '#0b1340', border: `2px solid ${isActive ? pc.accent : 'rgba(255,255,255,0.12)'}`,
-                                boxShadow: isActive ? `0 0 18px -2px ${pc.accent}` : 'inset 0 0 0 1px rgba(255,255,255,0.03)',
-                                transition: 'all .25s',
-                                cursor: 'pointer',
-                                padding: 0,
+                                 boxShadow: isActive ? `0 0 18px -2px ${pc.accent}` : 'inset 0 0 0 1px rgba(255,255,255,0.03)',
+                                 transition: 'all .25s',
+                                 cursor: 'pointer',
+                                padding: '6px 4px',
                               }}
                               >
-                                {resolveLogo(team)
-                                  ? <img src={resolveLogo(team)} alt={team.name} style={{ width: 36, height: 36, objectFit: 'contain' }} />
-                                  : <span style={{ color: '#64748b', fontSize: '0.6rem', fontWeight: 800 }}>{team.name.slice(0, 3).toUpperCase()}</span>}
-                              </button>
+                                {resolveFlag(team.country, 28, 19) || <div style={{ width: 28, height: 19, borderRadius: '3px', background: '#1e293b' }} />}
+                                <span style={{ color: '#e2e8f0', fontSize: '0.58rem', fontWeight: 700, textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%', lineHeight: 1.2 }}>
+                                  {team.name}
+                               </span> </button>
                             );
                           }
                           // Boş kura topu — üzerinde isim/logo yok, tıklanana kadar takım gizli.
@@ -354,10 +325,7 @@ export default function DrawAllPage() {
                     <>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '1.75rem' }}>
                         <div style={{ width: 96, height: 96, borderRadius: '20px', overflow: 'hidden', background: '#0b1340', border: '2px solid rgba(251,191,36,0.4)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 40px -6px rgba(251,191,36,0.45)' }}>
-                          {resolveLogo(activeTeam) && (
-                            <img src={resolveLogo(activeTeam)} alt={activeTeam.name} style={{ width: 80, height: 80, objectFit: 'contain' }}
-                              onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
-                          )}
+                          {resolveFlag(activeTeam.country, 72, 48)}
                         </div>
                         <div>
                           <div style={{ color: '#93c5fd', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '1px', marginBottom: '0.3rem' }}>
@@ -383,9 +351,7 @@ export default function DrawAllPage() {
                             display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 12px', borderRadius: '12px',
                             background: 'rgba(255,255,255,0.05)', borderLeft: `3px solid ${m.isHome ? '#38bdf8' : '#f472b6'}`,
                           }}>
-                            {resolveLogo(m.opponent)
-                              ? <img src={resolveLogo(m.opponent)} alt={m.opponent.name} style={{ width: 24, height: 24, objectFit: 'contain', flexShrink: 0 }} />
-                              : <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#1e293b', flexShrink: 0 }} />}
+                              {resolveFlag(m.opponent.country, 28, 19) || <div style={{ width: 28, height: 19, borderRadius: '3px', background: '#1e293b', flexShrink: 0 }} />}
                             <div style={{ minWidth: 0 }}>
                               <div style={{ color: '#e2e8f0', fontSize: '0.82rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.opponent.name}</div>
                               <div style={{ fontSize: '0.65rem', color: m.isHome ? '#7dd3fc' : '#f9a8d4', fontWeight: 700 }}>{m.isHome ? 'EV SAHİBİ' : 'DEPLASMAN'}</div>
@@ -434,9 +400,8 @@ export default function DrawAllPage() {
                               color: '#fff',
                             }}
                           >
-                            {resolveLogo(team)
-                              ? <img src={resolveLogo(team)} alt={team.name} style={{ width: 18, height: 18, objectFit: 'contain', flexShrink: 0 }} />
-                              : <div style={{ width: 18, height: 18, borderRadius: '50%', background: '#1e293b', flexShrink: 0 }} />}
+                             {resolveFlag(team.country, 24, 16) || <div style={{ width: 24, height: 16, borderRadius: '3px', background: '#1e293b', flexShrink: 0 }} />}
+
                             <span style={{ fontSize: '0.78rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{team.name}</span>
                           </button>
                         ))}
@@ -454,7 +419,8 @@ export default function DrawAllPage() {
                   {selectedTeam ? (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
                       <div style={{ width: 64, height: 64, borderRadius: '14px', overflow: 'hidden', background: '#1e3a8a', border: '2px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        {resolveLogo(selectedTeam) && <img src={resolveLogo(selectedTeam)} alt={selectedTeam.name} style={{ width: 54, height: 54, objectFit: 'contain' }} />}
+                      {resolveFlag(selectedTeam.country, 48, 32)}
+
                       </div>
                       <div>
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fff', margin: '0 0 0.25rem' }}>{selectedTeam.name}</h2>
@@ -480,10 +446,7 @@ export default function DrawAllPage() {
                             <div key={i} style={{ borderRadius: '9px', padding: '7px 9px', background: 'rgba(255,255,255,0.04)', borderLeft: `3px solid ${m.isHome ? '#38bdf8' : '#f472b6'}` }}>
                               <div style={{ fontSize: '0.6rem', color: m.isHome ? '#7dd3fc' : '#f9a8d4', fontWeight: 700, marginBottom: '3px' }}>{m.isHome ? 'EV' : 'DEPLASMAN'}</div>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                {resolveLogo(m.opponent)
-                                  ? <img src={resolveLogo(m.opponent)} style={{ width: 16, height: 16, objectFit: 'contain' }} />
-                                  : <div style={{ width: 16, height: 16, borderRadius: '50%', background: '#1e293b' }} />}
-                                <span style={{ color: '#e2e8f0', fontSize: '0.74rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.opponent.name}</span>
+                                 {resolveFlag(m.opponent.country, 20, 14) || <div style={{ width: 20, height: 14, borderRadius: '3px', background: '#1e293b' }} />}<span style={{ color: '#e2e8f0', fontSize: '0.74rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.opponent.name}</span>
                               </div>
                             </div>
                           )) : <p style={{ color: '#1e293b', fontSize: '0.7rem', textAlign: 'center', padding: '1rem 0', fontStyle: 'italic' }}>Rakip yok</p>}

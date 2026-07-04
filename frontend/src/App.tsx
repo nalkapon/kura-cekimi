@@ -24,8 +24,7 @@ function App() {
         <nav className="app-nav">
           <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
             <NavLink to="/" className="flex items-center gap-3" style={{ textDecoration: 'none' }}>
-              <span className="text-3xl app-brand-ball">⚽</span>
-              <h1 className="text-xl font-black tracking-wide app-brand-title">Kura Simülatörü</h1>
+         
             
             </NavLink>
             <div className="flex gap-6 app-nav-links">

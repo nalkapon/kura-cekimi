@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
 
 const SEGMENT_COLORS = ['#fbbf24', '#38bdf8', '#34d399', '#a78bfa', '#f472b6', '#fb923c'];
 
@@ -17,6 +17,22 @@ export default function WheelPage() {
   const wheelRef = useRef<HTMLDivElement>(null);
 
   const segAngle = options.length > 0 ? 360 / options.length : 0;
+
+  const [radiusPx, setRadiusPx] = useState(0);
+  useEffect(() => {
+    function update() {
+      const el = wheelRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      setRadiusPx(rect.width / 2);
+    }
+    update();
+    const el = wheelRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => update());
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [wheelRef]);
 
   function applyInput() {
     const list = rawInput.split('\n').map((s) => s.trim()).filter(Boolean);
@@ -152,16 +168,38 @@ export default function WheelPage() {
               >
                 {options.map((opt, i) => {
                   const angle = i * segAngle + segAngle / 2;
+                  // distance from center in px where label should sit (responsive)
+                  // place label near the middle of the wedge (closer to center)
+                  const dist = Math.max(40, Math.round(radiusPx * 0.38));
                   return (
-                    <div key={i} style={{
-                      position: 'absolute', left: '50%', top: '50%', width: '46%', height: 2,
-                      transform: `rotate(${angle}deg)`, transformOrigin: '0 0',
-                      display: 'flex', alignItems: 'center',
-                    }}>
+                    <div
+                      key={i}
+                      style={{
+                        position: 'absolute',
+                        left: '50%',
+                        top: '50%',
+                        transform: `translate(-50%,-50%) rotate(${angle}deg) translate(0, -${dist}px)`,
+                         transformOrigin: 'center center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        pointerEvents: 'none',
+                      }}
+                    >
                       <span style={{
-                        marginLeft: 14, fontSize: options.length > 12 ? 10 : 13, fontWeight: 800,
+                        display: 'inline-block',
+                        transform: `rotate(${-angle}deg)`,
+                        transformOrigin: 'center',
+                        fontSize: options.length > 12 ? 10 : 13,
+                        fontWeight: 800,
                         color: pickTextColor(),
-                        maxWidth: 90, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                        // limit width so label stays within slice center area
+                        maxWidth: Math.max(64, Math.round(radiusPx * 0.5)),
+                        padding: '0 4px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        textAlign: 'center',
                       }}>{opt}</span>
                     </div>
                   );

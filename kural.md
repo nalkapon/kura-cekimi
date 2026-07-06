@@ -1,5 +1,3 @@
-Harika bir noktadayız! Bu kuralları bir algoritmaya (özellikle Copilot'a) dökeceksen, sistemin anlayacağı dilde kısıtlamalar (constraints) olarak çok net tanımlanması gerekiyor.
-
 Şampiyonlar Ligi'nin yeni 36 takımlı "İsviçre Sistemi" için yazacağın algoritmanın çekirdeğini oluşturacak güncel kura kuralları şunlardır. Bunları doğrudan kodunun kısıtlama (logic) kuralları olarak kullanabilirsin:
 
 1. Temel Yapı Kuralları

@@ -1,103 +1,215 @@
-:root {
-  --app-bg-a: #06102a;
-  --app-bg-b: #2a0f3a;
-  --text-main: #eef2ff;
-  --text-soft: #93c5fd;
-  --accent: #fcd34d;
-  --nav-border: rgba(255, 215, 0, 0.12);
-  --nav-bg: linear-gradient(90deg, #020b2b 0%, #1a0a35 100%);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html,
 body {
-  min-height: 100%;
   margin: 0;
-  padding: 0;
-  background: linear-gradient(160deg, var(--app-bg-a) 0%, var(--app-bg-b) 100%) fixed;
-  color: var(--text-main);
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #020b2b;
 }
 
-img {
+#root {
+  width: 100%;
   max-width: 100%;
-  height: auto;
-  display: inline-block;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
+
+/* ── Top navigation ── */
 
 .app-nav {
-  background: var(--nav-bg);
-  border-bottom: 1px solid var(--nav-border);
-  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(2, 11, 43, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.18);
+}
+
+.app-nav .max-w-7xl {
+  flex-wrap: wrap;
+  row-gap: 12px;
+  padding-top: 1.05rem;
+  padding-bottom: 1.05rem;
 }
 
 .app-brand-ball {
-  filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.25));
+  line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.35));
 }
 
 .app-brand-title {
-  margin: 0;
-  color: #ffffff;
+  background: linear-gradient(135deg, #fff 0%, #bfdbfe 55%, #818cf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
 }
 
 .app-cl-logo {
-  width: 28px;
   height: 28px;
+  width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(147, 197, 253, 0.35));
-}
-
-@media (max-width: 768px) {
-  .app-cl-logo {
-    width: 22px;
-    height: 22px;
-  }
+  opacity: 0.9;
+  margin-left: 4px;
 }
 
 .app-nav-links {
-  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 8px;
 }
 
 .app-link {
-  color: var(--text-soft);
+  color: #93c5fd;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
   text-decoration: none;
 }
 
 .app-link:hover {
-  color: var(--accent);
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.25);
 }
 
-.team-small-logo {
-  width: 20px !important;
-  height: 20px !important;
-  max-width: 20px !important;
-  max-height: 20px !important;
-  object-fit: contain !important;
-  display: inline-block !important;
+.app-link.active {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.35);
 }
 
-.h-8.w-8 img,
-.h-8.w-8 > img {
-  width: 24px !important;
-  height: 24px !important;
-  max-width: 24px !important;
-  max-height: 24px !important;
-  object-fit: contain !important;
-  display: inline-block !important;
+/* Hamburger butonu: masaüstünde gizli, sadece mobilde görünür */
+.app-nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  background: rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
+  font-size: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+@media (max-width: 900px) {
+  .app-nav .max-w-7xl {
+    flex-wrap: nowrap;
+  }
+
+  .app-nav-toggle {
+    display: flex;
+  }
+
+  .app-cl-logo {
+    display: none;
+  }
+
+  /* Mobilde linkler artık yatay kaydırılmıyor: tam genişlikte, dikey,
+     açılır bir panel içinde — hiçbir link ekran dışında kalıp "kaybolmuyor". */
+  .app-nav-links {
+    position: fixed;
+    top: 76px;
+    left: 0;
+    right: 0;
+    max-height: calc(100svh - 76px);
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    background: rgba(2, 11, 43, 0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.18);
+    padding: 10px 16px 16px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+
+  .app-nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .app-link {
+    width: 100%;
+    text-align: left;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+/* ── DrawAllPage: mobilde responsive grid'ler ──
+   Sabit "minmax(420px, ...)" gibi minimum genişlikler mobilde taşmaya sebep oluyordu.
+   Bu class'lar aynı masaüstü görünümünü korur, dar ekranlarda tek sütuna iner. */
+
+.drawall-drawing-grid {
+  display: grid;
+  grid-template-columns: minmax(420px, 1.3fr) 1fr;
+  gap: 1.5rem;
+  align-items: start;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 99px;
+.drawall-pot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+.drawall-bigscreen-matches-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  flex: 1;
+  align-content: start;
+}
+
+.drawall-results-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) 2fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.drawall-pot-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .drawall-drawing-grid,
+  .drawall-results-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .drawall-pot-grid,
+  .drawall-bigscreen-matches-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .drawall-pot-detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 380px) {
+  .drawall-pot-detail-grid {
+    grid-template-columns: 1fr;
+  }
 }

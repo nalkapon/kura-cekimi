@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+Disallow: /dist/
+
+Sitemap: https://kuracekimi.com/sitemap.xml
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /

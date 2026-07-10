@@ -86,91 +86,26 @@ export default function WheelPage() {
   }, [options, segAngle]);
 
   return (
-    <div
-      className="min-h-screen bg-[#020b2b] px-3 py-4 sm:px-6 sm:py-8"
-      style={{ background: 'linear-gradient(160deg, #020b2b 0%, #0e0420 55%, #1a0635 100%)' }}
-    >
-      <div className="mx-auto w-full max-w-6xl">
-        <div className="mb-6 text-center sm:mb-10">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-gradient-to-r from-amber-300/10 to-indigo-400/10 px-4 py-1.5 sm:mb-6 sm:px-7 sm:py-2">
-            <span className="text-xs text-amber-300">★</span>
-            <span className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-blue-200 sm:text-xs">kuracek.com</span>
-            <span className="text-xs text-amber-300">★</span>
+    <div className="wheel-page">
+      <div className="wheel-shell">
+        <div className="wheel-hero">
+          <div className="wheel-pill">
+            <span>★</span>
+            <span>kuracek.com</span>
+            <span>★</span>
           </div>
-          <h1 className="mb-2 bg-gradient-to-r from-white via-blue-200 to-indigo-300 bg-clip-text text-4xl font-black leading-tight text-transparent sm:text-6xl">
-            🎡 Çarkıfelek
-          </h1>
-          <p className="mx-auto max-w-xl text-sm text-blue-300 sm:text-base">
-            İsim ya da seçenek listeni gir, çarkı çevir, kazananı gör.
-          </p>
+          <h1>🎡 Çarkıfelek</h1>
+          <p>İsim ya da seçenek listeni gir, çarkı çevir, kazananı gör.</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(300px,1fr)_minmax(360px,1.3fr)] lg:items-start lg:gap-7">
-          <div className="order-2 overflow-hidden rounded-2xl border border-indigo-400/20 bg-[#020a28]/85 backdrop-blur-xl lg:order-1">
-            <div className="border-b border-indigo-400/20 px-4 py-4 sm:px-6 sm:py-5">
-              <h3 className="text-base font-black text-white sm:text-lg">Seçenekler</h3>
-              <p className="mt-1 text-xs text-slate-500">Her satıra bir isim/seçenek yaz</p>
-            </div>
-            <div className="px-4 py-4 sm:px-6 sm:py-5">
-              <textarea
-                value={rawInput}
-                onChange={(e) => setRawInput(e.target.value)}
-                rows={8}
-                className="w-full resize-y rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm text-slate-200 outline-none ring-0 placeholder:text-slate-400 focus:border-indigo-300/60"
-              />
-
-              <div className="mt-3 flex gap-2">
-                <button
-                  onClick={applyInput}
-                  className="flex-1 rounded-xl border border-indigo-300/40 bg-indigo-400/20 px-3 py-2.5 text-sm font-bold text-indigo-200 transition hover:bg-indigo-400/30"
-                >
-                  Listeyi Güncelle
-                </button>
-                <button
-                  onClick={reset}
-                  className="rounded-xl border border-white/15 px-3 py-2.5 text-sm font-bold text-slate-300 transition hover:bg-white/10"
-                >
-                  Sıfırla
-                </button>
-              </div>
-
-              <label className="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-300">
-                <input
-                  type="checkbox"
-                  checked={removeWinner}
-                  onChange={(e) => setRemoveWinner(e.target.checked)}
-                  className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-indigo-400"
-                />
-                Kazananı çarktan çıkar
-              </label>
-
-              {history.length > 0 && (
-                <div className="mt-6">
-                  <div className="mb-2 text-xs font-bold text-slate-200">Geçmiş Kazananlar</div>
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {history.map((h, i) => (
-                      <span
-                        key={i}
-                        className="rounded-full border border-amber-300/35 bg-amber-300/10 px-2.5 py-1 text-[11px] font-bold text-amber-300 sm:px-3 sm:text-xs"
-                      >
-                        {h}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="order-1 flex flex-col items-center rounded-2xl border border-indigo-400/20 bg-[#020a28]/85 px-3 py-4 backdrop-blur-xl sm:px-6 sm:py-8 lg:order-2">
-            <div className="relative h-[min(88vw,420px)] w-[min(88vw,420px)]">
-              <div
-                className="pointer-events-none absolute left-1/2 top-0 z-20 h-0 w-0 -translate-x-1/2 -translate-y-1 border-x-[12px] border-x-transparent border-t-[22px] border-t-amber-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] sm:border-x-[14px] sm:border-t-[26px]"
-              />
+        <div className="wheel-layout">
+          <section className="wheel-card wheel-canvas-card">
+            <div className="wheel-canvas-wrap">
+              <div className="wheel-pointer" />
 
               <div
                 ref={wheelRef}
-                className="relative h-full w-full overflow-hidden rounded-full border-[5px] border-[#0b1340] shadow-[0_0_0_2px_rgba(251,191,36,0.35),0_20px_50px_-20px_rgba(0,0,0,0.6)] sm:border-[6px]"
+                className="wheel-canvas"
                 style={{
                   background: gradient,
                   transform: `rotate(${rotation}deg)`,
@@ -220,39 +155,360 @@ export default function WheelPage() {
                 })}
               </div>
 
-              <div className="absolute left-1/2 top-1/2 z-10 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-amber-300 bg-[#0b1340] shadow-[0_0_18px_-4px_rgba(251,191,36,0.6)] sm:h-14 sm:w-14 sm:border-[3px]">
-                <span className="text-xl sm:text-2xl">🎯</span>
+              <div className="wheel-center-dot">
+                <span>🎯</span>
               </div>
             </div>
 
             <button
               onClick={spin}
               disabled={spinning || options.length < 2}
-              className="mt-6 rounded-xl px-6 py-3 text-sm font-black text-white transition sm:mt-8 sm:px-10 sm:text-base"
-              style={{
-                border: (spinning || options.length < 2) ? '1px solid #1e293b' : '1px solid rgba(250,204,21,0.3)',
-                background: (spinning || options.length < 2) ? '#1e293b' : 'linear-gradient(135deg,#1d4ed8 0%,#4338ca 100%)',
-                color: (spinning || options.length < 2) ? '#475569' : '#fff',
-                cursor: (spinning || options.length < 2) ? 'not-allowed' : 'pointer',
-                boxShadow: (spinning || options.length < 2) ? 'none' : '0 0 40px -8px rgba(99,102,241,0.65)',
-              }}
+              className="wheel-spin-btn"
             >
               {spinning ? '🎡 Çark Dönüyor...' : '🎡 Çarkı Çevir'}
             </button>
 
             {options.length < 2 && (
-              <p className="mt-2 text-center text-xs text-red-400 sm:text-sm">Çevirmek için en az 2 seçenek gerekli.</p>
+              <p className="wheel-help-danger">Çevirmek için en az 2 seçenek gerekli.</p>
             )}
 
             {winner && !spinning && (
-              <div className="mt-6 rounded-2xl border border-amber-300/40 bg-amber-300/10 px-5 py-4 text-center sm:mt-7 sm:px-8">
-                <div className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-blue-300 sm:text-xs">Kazanan</div>
-                <div className="mt-1 text-2xl font-black text-amber-300 sm:text-3xl">{winner}</div>
+              <div className="wheel-winner-box">
+                <div className="wheel-winner-label">Kazanan</div>
+                <div className="wheel-winner-name">{winner}</div>
               </div>
             )}
-          </div>
+          </section>
+
+          <section className="wheel-card wheel-input-card">
+            <div className="wheel-card-head">
+              <h3>Seçenekler</h3>
+              <p>Her satıra bir isim/seçenek yaz</p>
+            </div>
+
+            <div className="wheel-card-body">
+              <textarea
+                value={rawInput}
+                onChange={(e) => setRawInput(e.target.value)}
+                rows={8}
+                className="wheel-textarea"
+              />
+
+              <div className="wheel-actions">
+                <button onClick={applyInput} className="wheel-btn wheel-btn-primary">Listeyi Güncelle</button>
+                <button onClick={reset} className="wheel-btn wheel-btn-ghost">Sıfırla</button>
+              </div>
+
+              <label className="wheel-checkbox">
+                <input
+                  type="checkbox"
+                  checked={removeWinner}
+                  onChange={(e) => setRemoveWinner(e.target.checked)}
+                />
+                Kazananı çarktan çıkar
+              </label>
+
+              {history.length > 0 && (
+                <div className="wheel-history-wrap">
+                  <div className="wheel-history-title">Geçmiş Kazananlar</div>
+                  <div className="wheel-history-list">
+                    {history.map((h, i) => (
+                      <span key={i} className="wheel-history-item">{h}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
         </div>
       </div>
+
+      <style>{`
+        .wheel-page {
+          min-height: 100vh;
+          padding: 1rem 0.75rem 1.5rem;
+          background: linear-gradient(160deg, #020b2b 0%, #0e0420 55%, #1a0635 100%);
+        }
+        .wheel-shell {
+          width: 100%;
+          max-width: 1180px;
+          margin: 0 auto;
+        }
+        .wheel-hero {
+          text-align: center;
+          margin-bottom: 1rem;
+        }
+        .wheel-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 0.75rem;
+          padding: 0.35rem 0.9rem;
+          border-radius: 999px;
+          border: 1px solid rgba(250, 204, 21, 0.32);
+          background: linear-gradient(135deg, rgba(250, 204, 21, 0.1), rgba(99, 102, 241, 0.1));
+          color: #fbbf24;
+          font-size: 0.72rem;
+          font-weight: 800;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+        .wheel-hero h1 {
+          margin: 0;
+          line-height: 1.08;
+          font-size: clamp(1.8rem, 6vw, 3.5rem);
+          font-weight: 900;
+          background: linear-gradient(135deg, #fff 0%, #bfdbfe 55%, #818cf8 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .wheel-hero p {
+          margin: 0.55rem auto 0;
+          max-width: 620px;
+          color: #93c5fd;
+          font-size: 0.95rem;
+        }
+        .wheel-layout {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          align-items: start;
+        }
+        .wheel-card {
+          border-radius: 20px;
+          border: 1px solid rgba(99, 102, 241, 0.22);
+          background: rgba(2, 10, 40, 0.85);
+          backdrop-filter: blur(18px);
+          overflow: hidden;
+        }
+        .wheel-canvas-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 1rem 0.75rem 1.15rem;
+        }
+        .wheel-canvas-wrap {
+          position: relative;
+          width: min(90vw, 430px);
+          height: min(90vw, 430px);
+        }
+        .wheel-pointer {
+          position: absolute;
+          top: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 3;
+          width: 0;
+          height: 0;
+          border-left: 13px solid transparent;
+          border-right: 13px solid transparent;
+          border-top: 24px solid #fbbf24;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+        .wheel-canvas {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 6px solid #0b1340;
+          box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.35), 0 24px 55px -20px rgba(0, 0, 0, 0.6);
+        }
+        .wheel-center-dot {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: 3px solid #fbbf24;
+          background: #0b1340;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 0 20px -4px rgba(251, 191, 36, 0.6);
+          font-size: 1.3rem;
+        }
+        .wheel-spin-btn {
+          margin-top: 1rem;
+          padding: 0.8rem 1.55rem;
+          font-size: 0.95rem;
+          font-weight: 900;
+          border-radius: 13px;
+          border: 1px solid rgba(250, 204, 21, 0.3);
+          color: #fff;
+          background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 100%);
+          box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.65);
+          cursor: pointer;
+        }
+        .wheel-spin-btn:disabled {
+          border-color: #1e293b;
+          background: #1e293b;
+          color: #475569;
+          box-shadow: none;
+          cursor: not-allowed;
+        }
+        .wheel-help-danger {
+          margin-top: 0.5rem;
+          font-size: 0.78rem;
+          color: #f87171;
+          text-align: center;
+        }
+        .wheel-winner-box {
+          margin-top: 1rem;
+          text-align: center;
+          padding: 0.9rem 1.1rem;
+          border-radius: 14px;
+          background: rgba(251, 191, 36, 0.1);
+          border: 1px solid rgba(251, 191, 36, 0.35);
+          min-width: min(88vw, 310px);
+        }
+        .wheel-winner-label {
+          color: #93c5fd;
+          font-size: 0.67rem;
+          font-weight: 800;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+        }
+        .wheel-winner-name {
+          color: #fbbf24;
+          font-size: clamp(1.2rem, 4vw, 1.85rem);
+          font-weight: 900;
+          margin-top: 0.2rem;
+        }
+        .wheel-input-card {
+          order: 2;
+        }
+        .wheel-card-head {
+          padding: 1rem 1rem 0.8rem;
+          border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        .wheel-card-head h3 {
+          margin: 0;
+          color: #fff;
+          font-size: 1.03rem;
+          font-weight: 900;
+        }
+        .wheel-card-head p {
+          margin: 0.3rem 0 0;
+          color: #64748b;
+          font-size: 0.8rem;
+        }
+        .wheel-card-body {
+          padding: 1rem;
+        }
+        .wheel-textarea {
+          width: 100%;
+          box-sizing: border-box;
+          resize: vertical;
+          border-radius: 12px;
+          padding: 0.75rem 0.85rem;
+          font-size: 0.92rem;
+          color: #e2e8f0;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          background: rgba(255, 255, 255, 0.05);
+          outline: none;
+        }
+        .wheel-textarea:focus {
+          border-color: rgba(165, 180, 252, 0.72);
+        }
+        .wheel-actions {
+          display: flex;
+          gap: 0.55rem;
+          margin-top: 0.7rem;
+        }
+        .wheel-btn {
+          border-radius: 10px;
+          padding: 0.62rem 0.82rem;
+          font-size: 0.88rem;
+          font-weight: 700;
+          cursor: pointer;
+        }
+        .wheel-btn-primary {
+          flex: 1;
+          border: 1px solid rgba(99, 102, 241, 0.42);
+          color: #c7d2fe;
+          background: rgba(99, 102, 241, 0.2);
+        }
+        .wheel-btn-ghost {
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          color: #94a3b8;
+          background: transparent;
+        }
+        .wheel-checkbox {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-top: 0.8rem;
+          color: #94a3b8;
+          font-size: 0.86rem;
+          cursor: pointer;
+        }
+        .wheel-history-wrap {
+          margin-top: 1rem;
+        }
+        .wheel-history-title {
+          color: #e2e8f0;
+          font-size: 0.82rem;
+          font-weight: 700;
+          margin-bottom: 0.45rem;
+        }
+        .wheel-history-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.38rem;
+        }
+        .wheel-history-item {
+          background: rgba(251, 191, 36, 0.12);
+          border: 1px solid rgba(251, 191, 36, 0.3);
+          color: #fbbf24;
+          padding: 0.24rem 0.62rem;
+          border-radius: 999px;
+          font-size: 0.72rem;
+          font-weight: 700;
+        }
+        @media (min-width: 1024px) {
+          .wheel-page {
+            padding: 1.75rem 1.5rem 2.5rem;
+          }
+          .wheel-hero {
+            margin-bottom: 1.5rem;
+          }
+          .wheel-layout {
+            grid-template-columns: minmax(320px, 1fr) minmax(360px, 1.2fr);
+            gap: 1.35rem;
+          }
+          .wheel-canvas-card {
+            order: 2;
+            padding: 1.6rem;
+          }
+          .wheel-input-card {
+            order: 1;
+          }
+          .wheel-canvas-wrap {
+            width: min(74vh, 450px);
+            height: min(74vh, 450px);
+          }
+          .wheel-pointer {
+            border-left-width: 14px;
+            border-right-width: 14px;
+            border-top-width: 26px;
+          }
+          .wheel-spin-btn {
+            margin-top: 1.4rem;
+            padding: 0.85rem 2rem;
+            font-size: 1rem;
+          }
+          .wheel-card-head,
+          .wheel-card-body {
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+          }
+        }
+      `}</style>
     </div>
   );
 }

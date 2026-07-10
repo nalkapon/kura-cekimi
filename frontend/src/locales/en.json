@@ -1,0 +1,49 @@
+{
+  "common": {
+    
+    "goToDraw": "Go to draw"
+  },
+  "nav": {
+    "home": "🏠 Home",
+    "championsLeague": "🏆 Champions League",
+    "europaLeague": "🥈 Europa League",
+    "conferenceLeague": "🥉 Conference League",
+    "wheel": "🎡 Wheel of Fortune",
+    "paperDraw": "🎫 Paper Draw",
+    "dice": "🎲 Roll Dice",
+    "cards": "🃏 Shuffle Cards",
+    "tombala": "🎱 Bingo",
+    "haliSaha": "👥 Team Builder",
+    "vampirKoylu": "🦇 Vampire & Villager"
+  },
+  "home": {
+    "title": "You Draw the Lots",
+    "subtitle": "From the Champions League to the wheel of fortune, pick a method below and start the draw.",
+    "leagueTools": "UEFA Draws",
+    "generalTools": "General Draw Tools",
+    "comingSoon": "(Coming Soon)",
+    "leagues": {
+      "sampiyonlar-ligi": {
+        "title": "UEFA Champions League",
+        "description": "League phase draw for Europe's most prestigious club competition with 36 teams."
+      },
+      "uefa-ligi": {
+        "title": "UEFA Europa League",
+        "description": "UEFA Europa League league phase draw."
+      },
+      "konferans-ligi": {
+        "title": "UEFA Conference League",
+        "description": "UEFA Conference League league phase draw."
+      }
+    }
+  },
+  "tools": {
+    "wheel": { "title": "Wheel of Fortune", "description": "Type your list of names, spin the wheel, learn the winner instantly." },
+    "paperDraw": { "title": "Paper Draw", "description": "Tap one of the folded papers in the bag, open it, and see the result." },
+    "dice": { "title": "Roll Dice", "description": "Pick 1-6 dice, roll, and track the total and history." },
+    "cards": { "title": "Shuffle Cards", "description": "Shuffle a 52-card deck and draw cards one by one." },
+    "tombala": { "title": "Bingo", "description": "Draw a number from the bag, watch it mark on the 1-90 board." },
+    "haliSaha": { "title": "5-a-side Team Builder", "description": "Split 10, 12, or 14 players into two balanced teams by skill rating." },
+    "vampirKoylu": { "title": "Vampire & Villager", "description": "Assign roles secretly, hold to reveal your card, then pass it on." }
+  }
+}

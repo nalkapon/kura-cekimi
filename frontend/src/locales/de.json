@@ -1,0 +1,49 @@
+{
+  "common": {
+    
+    "goToDraw": "Zur Ziehung"
+  },
+  "nav": {
+    "home": "🏠 Startseite",
+    "championsLeague": "🏆 Champions League",
+    "europaLeague": "🥈 Europa League",
+    "conferenceLeague": "🥉 Conference League",
+    "wheel": "🎡 Glücksrad",
+    "paperDraw": "🎫 Zettel Ziehen",
+    "dice": "🎲 Würfeln",
+    "cards": "🃏 Karten Mischen",
+    "tombala": "🎱 Bingo",
+    "haliSaha": "👥 Team-Generator",
+    "vampirKoylu": "🦇 Vampir & Dorfbewohner"
+  },
+  "home": {
+    "title": "Du ziehst die Lose",
+    "subtitle": "Von der Champions League bis zum Glücksrad – wähle unten deine Methode und starte die Ziehung.",
+    "leagueTools": "UEFA-Ziehungen",
+    "generalTools": "Allgemeine Ziehungs-Tools",
+    "comingSoon": "(Demnächst)",
+    "leagues": {
+      "sampiyonlar-ligi": {
+        "title": "UEFA Champions League",
+        "description": "Ligphasen-Auslosung des prestigeträchtigsten europäischen Klubwettbewerbs mit 36 Teams."
+      },
+      "uefa-ligi": {
+        "title": "UEFA Europa League",
+        "description": "Ligphasen-Auslosung der UEFA Europa League."
+      },
+      "konferans-ligi": {
+        "title": "UEFA Conference League",
+        "description": "Ligphasen-Auslosung der UEFA Conference League."
+      }
+    }
+  },
+  "tools": {
+    "wheel": { "title": "Glücksrad", "description": "Gib deine Namensliste ein, dreh das Rad und erfahre sofort den Gewinner." },
+    "paperDraw": { "title": "Zettel Ziehen", "description": "Tippe auf einen gefalteten Zettel im Beutel, öffne ihn und sieh das Ergebnis." },
+    "dice": { "title": "Würfeln", "description": "Wähle 1-6 Würfel, würfle und verfolge Summe und Verlauf." },
+    "cards": { "title": "Karten Mischen", "description": "Mische ein 52-Karten-Deck und ziehe Karten einzeln." },
+    "tombala": { "title": "Bingo", "description": "Ziehe eine Zahl aus dem Beutel, sieh sie auf dem 1-90-Feld markiert." },
+    "haliSaha": { "title": "Team-Generator", "description": "Teile 10, 12 oder 14 Spieler nach Stärke in zwei ausgeglichene Teams." },
+    "vampirKoylu": { "title": "Vampir & Dorfbewohner", "description": "Verteile Rollen geheim, halte gedrückt um deine Karte zu sehen, gib weiter." }
+  }
+}

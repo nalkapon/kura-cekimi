@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { COMPETITIONS } from '../data/competitions';
 
@@ -11,84 +13,7 @@ interface ToolCard {
   glow: string;
 }
 
-const LEAGUE_TOOLS: ToolCard[] = COMPETITIONS.map((c) => ({
-  to: `/${c.slug}`,
-  emoji: c.emoji,
-  title: c.active ? c.name : `${c.name} (Yakında)`,
-  description: c.description,
-  accent: c.accent,
-  border: c.border,
-  glow: c.accentSoft,
-}));
-
-const GENERAL_TOOLS: ToolCard[] = [
-  {
-    to: '/carkifelek',
-    emoji: '🎡',
-    title: 'Çarkıfelek',
-    description: 'İsim listeni yaz, çarkı çevir, kazananı anında öğren.',
-    accent: '#a78bfa',
-    border: 'rgba(167,139,250,0.3)',
-    glow: 'rgba(167,139,250,0.18)',
-  },
-  {
-    to: '/kagit-cek',
-    emoji: '🎫',
-    title: 'Kağıt Çek',
-    description: 'Torbadaki katlı kağıtlardan birine tıkla, aç ve gör.',
-    accent: '#34d399',
-    border: 'rgba(52,211,153,0.3)',
-    glow: 'rgba(52,211,153,0.18)',
-  },
-  {
-    to: '/zar-at',
-    emoji: '🎲',
-    title: 'Zar At',
-    description: '1-6 arası zar seç, at, toplamı ve geçmişi takip et.',
-    accent: '#f472b6',
-    border: 'rgba(244,114,182,0.3)',
-    glow: 'rgba(244,114,182,0.18)',
-  },
-  {
-    to: '/kart-karistir',
-    emoji: '🃏',
-    title: 'Kart Karıştır',
-    description: '52 kartlık desteyi karıştır, üstten tek tek çek.',
-    accent: '#fb923c',
-    border: 'rgba(251,146,60,0.3)',
-    glow: 'rgba(251,146,60,0.18)',
-  },
-  {
-    to: '/tombala',
-    emoji: '🎱',
-    title: 'Tombala',
-    description: 'Keseden numara çek, 1-90 tabloda sırayla işaretlensin.',
-    accent: '#facc15',
-    border: 'rgba(250,204,21,0.3)',
-    glow: 'rgba(250,204,21,0.18)',
-  },
-  {
-    to: '/hali-saha',
-    emoji: '👥',
-    title: 'Hali Saha Takim Kurucu',
-    description: '10, 12 veya 14 kisiyi yildiz gucune gore dengeli iki takima bol.',
-    accent: '#22d3ee',
-    border: 'rgba(34,211,238,0.3)',
-    glow: 'rgba(34,211,238,0.18)',
-  },
-  {
-    to: '/vampir-koylu',
-    emoji: '🦇',
-    title: 'Vampir Koylu',
-    description: 'Rolleri gizli dagit, karti basili tutarak gor ve siradaki kisiye devret.',
-    accent: '#c084fc',
-    border: 'rgba(192,132,252,0.3)',
-    glow: 'rgba(192,132,252,0.18)',
-  },
- 
-];
-
-function ToolCardItem({ tool }: { tool: ToolCard }) {
+function ToolCardItem({ tool, cta }: { tool: ToolCard; cta: string }) {
   return (
     <Link
       to={tool.to}
@@ -117,13 +42,65 @@ function ToolCardItem({ tool }: { tool: ToolCard }) {
       <h3 style={{ color: '#fff', fontSize: '1.15rem', fontWeight: 900, margin: '0 0 0.4rem' }}>{tool.title}</h3>
       <p style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>{tool.description}</p>
       <div style={{ marginTop: '1.1rem', color: tool.accent, fontSize: '0.78rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: 6 }}>
-        Kuraya git <span aria-hidden>→</span>
+        {cta} <span aria-hidden>→</span>
       </div>
     </Link>
   );
 }
 
 export default function HomePage() {
+  const { t } = useTranslation();
+
+  const leagueTools: ToolCard[] = useMemo(() => COMPETITIONS.map((c) => ({
+    to: `/${c.slug}`,
+    emoji: c.emoji,
+    title: c.active
+      ? t(`home.leagues.${c.slug}.title`, { defaultValue: c.name })
+      : `${t(`home.leagues.${c.slug}.title`, { defaultValue: c.name })} ${t('home.comingSoon')}`,
+    description: t(`home.leagues.${c.slug}.description`, { defaultValue: c.description }),
+    accent: c.accent,
+    border: c.border,
+    glow: c.accentSoft,
+  })), [t]);
+
+  const generalTools: ToolCard[] = useMemo(() => [
+    {
+      to: '/carkifelek', emoji: '🎡',
+      title: t('tools.wheel.title'), description: t('tools.wheel.description'),
+      accent: '#a78bfa', border: 'rgba(167,139,250,0.3)', glow: 'rgba(167,139,250,0.18)',
+    },
+    {
+      to: '/kagit-cek', emoji: '🎫',
+      title: t('tools.paperDraw.title'), description: t('tools.paperDraw.description'),
+      accent: '#34d399', border: 'rgba(52,211,153,0.3)', glow: 'rgba(52,211,153,0.18)',
+    },
+    {
+      to: '/zar-at', emoji: '🎲',
+      title: t('tools.dice.title'), description: t('tools.dice.description'),
+      accent: '#f472b6', border: 'rgba(244,114,182,0.3)', glow: 'rgba(244,114,182,0.18)',
+    },
+    {
+      to: '/kart-karistir', emoji: '🃏',
+      title: t('tools.cards.title'), description: t('tools.cards.description'),
+      accent: '#fb923c', border: 'rgba(251,146,60,0.3)', glow: 'rgba(251,146,60,0.18)',
+    },
+    {
+      to: '/tombala', emoji: '🎱',
+      title: t('tools.tombala.title'), description: t('tools.tombala.description'),
+      accent: '#facc15', border: 'rgba(250,204,21,0.3)', glow: 'rgba(250,204,21,0.18)',
+    },
+    {
+      to: '/hali-saha', emoji: '👥',
+      title: t('tools.haliSaha.title'), description: t('tools.haliSaha.description'),
+      accent: '#22d3ee', border: 'rgba(34,211,238,0.3)', glow: 'rgba(34,211,238,0.18)',
+    },
+    {
+      to: '/vampir-koylu', emoji: '🦇',
+      title: t('tools.vampirKoylu.title'), description: t('tools.vampirKoylu.description'),
+      accent: '#c084fc', border: 'rgba(192,132,252,0.3)', glow: 'rgba(192,132,252,0.18)',
+    },
+  ], [t]);
+
   return (
     <div style={{ minHeight: '100vh', padding: '3rem 1.5rem 4rem', background: 'linear-gradient(160deg, #020b2b 0%, #0e0420 55%, #1a0635 100%)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -143,7 +120,7 @@ export default function HomePage() {
 
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'linear-gradient(135deg,rgba(250,204,21,0.1),rgba(99,102,241,0.1))', border: '1px solid rgba(250,204,21,0.22)', borderRadius: 9999, padding: '8px 28px', marginBottom: '1.5rem', position: 'relative' }}>
             <span style={{ color: '#fbbf24', fontSize: 13 }}>★</span>
-            <span style={{ color: '#bfdbfe', fontSize: 11, fontWeight: 800, letterSpacing: 3, textTransform: 'uppercase' }}>kuracek.com</span>
+            <span style={{ color: '#bfdbfe', fontSize: 11, fontWeight: 800, letterSpacing: 3, textTransform: 'uppercase' }}>kuracekimi.com</span>
             <span style={{ color: '#fbbf24', fontSize: 13 }}>★</span>
           </div>
 
@@ -152,32 +129,32 @@ export default function HomePage() {
             background: 'linear-gradient(135deg,#fff 0%,#bfdbfe 55%,#818cf8 100%)', WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent', backgroundClip: 'text',
           }}>
-            Kurayı Sen Çek
+            {t('home.title')}
           </h1>
           <p style={{ color: '#93c5fd', fontSize: '1.05rem', maxWidth: 560, margin: '0 auto', position: 'relative' }}>
-            Şampiyonlar Ligi'nden çarkıfeleğe, aşağıdan istediğin yöntemi seç ve çekilişi başlat.
+            {t('home.subtitle')}
           </p>
         </div>
 
         {/* ── LEAGUE TOOLS ── */}
         <div style={{ marginBottom: '2.75rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.1rem' }}>
-            <span style={{ color: '#fbbf24', fontSize: '0.75rem', fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase' }}>UEFA Kuraları</span>
+            <span style={{ color: '#fbbf24', fontSize: '0.75rem', fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase' }}>{t('home.leagueTools')}</span>
             <div style={{ flex: 1, height: 1, background: 'rgba(251,191,36,0.15)' }} />
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.1rem' }}>
-            {LEAGUE_TOOLS.map((tool) => <ToolCardItem key={tool.to} tool={tool} />)}
+            {leagueTools.map((tool) => <ToolCardItem key={tool.to} tool={tool} cta={t('common.goToDraw')} />)}
           </div>
         </div>
 
         {/* ── GENERAL TOOLS ── */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1.1rem' }}>
-            <span style={{ color: '#a78bfa', fontSize: '0.75rem', fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase' }}>Genel Kura Araçları</span>
+            <span style={{ color: '#a78bfa', fontSize: '0.75rem', fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase' }}>{t('home.generalTools')}</span>
             <div style={{ flex: 1, height: 1, background: 'rgba(167,139,250,0.15)' }} />
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.1rem' }}>
-            {GENERAL_TOOLS.map((tool) => <ToolCardItem key={tool.to} tool={tool} />)}
+            {generalTools.map((tool) => <ToolCardItem key={tool.to} tool={tool} cta={t('common.goToDraw')} />)}
           </div>
         </div>
       </div>

@@ -1,0 +1,49 @@
+{
+  "common": {
+    
+    "goToDraw": "Kuraya git"
+  },
+  "nav": {
+    "home": "🏠 Ana Sayfa",
+    "championsLeague": "🏆 Şampiyonlar Ligi",
+    "europaLeague": "🥈 UEFA Ligi",
+    "conferenceLeague": "🥉 Konferans Ligi",
+    "wheel": "🎡 Çarkıfelek",
+    "paperDraw": "🎫 Kağıt Çek",
+    "dice": "🎲 Zar At",
+    "cards": "🃏 Kart Karıştır",
+    "tombala": "🎱 Tombala",
+    "haliSaha": "👥 Halı Saha",
+    "vampirKoylu": "🦇 Vampir Köylü"
+  },
+  "home": {
+    "title": "Kurayı Sen Çek",
+    "subtitle": "Şampiyonlar Ligi'nden çarkıfeleğe, aşağıdan istediğin yöntemi seç ve çekilişi başlat.",
+    "leagueTools": "UEFA Kuraları",
+    "generalTools": "Genel Kura Araçları",
+    "comingSoon": "(Yakında)",
+    "leagues": {
+      "sampiyonlar-ligi": {
+        "title": "UEFA Şampiyonlar Ligi",
+        "description": "Avrupa'nın en prestijli kulüp turnuvasının 36 takımlık lig fazı kurası."
+      },
+      "uefa-ligi": {
+        "title": "UEFA Avrupa Ligi",
+        "description": "UEFA Avrupa Ligi lig fazı kurası."
+      },
+      "konferans-ligi": {
+        "title": "UEFA Konferans Ligi",
+        "description": "UEFA Konferans Ligi lig fazı kurası."
+      }
+    }
+  },
+  "tools": {
+    "wheel": { "title": "Çarkıfelek", "description": "İsim listeni yaz, çarkı çevir, kazananı anında öğren." },
+    "paperDraw": { "title": "Kağıt Çek", "description": "Torbadaki katlı kağıtlardan birine tıkla, aç ve gör." },
+    "dice": { "title": "Zar At", "description": "1-6 arası zar seç, at, toplamı ve geçmişi takip et." },
+    "cards": { "title": "Kart Karıştır", "description": "52 kartlık desteyi karıştır, üstten tek tek çek." },
+    "tombala": { "title": "Tombala", "description": "Keseden numara çek, 1-90 tabloda sırayla işaretlensin." },
+    "haliSaha": { "title": "Halı Saha Takım Kurucu", "description": "10, 12 veya 14 kişiyi yıldız gücüne göre dengeli iki takıma böl." },
+    "vampirKoylu": { "title": "Vampir Köylü", "description": "Rolleri gizli dağıt, kartı basılı tutarak gör ve sıradaki kişiye devret." }
+  }
+}

@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { drawAPI } from '../services/api';
-import { GB, DE, ES, FR, IT, PT, TR, BE, NL, HR, CZ, RS, NO, UA, AT, CH, PL, SK} from 'country-flag-icons/react/3x2';
-
+import { GB, DE, ES, FR, IT, PT, TR, BE, NL, HR, CZ, RS, NO, UA, AT, CH } from 'country-flag-icons/react/3x2';
 
 const COUNTRY_FLAGS: Record<string, any> = {
   EN: GB, DE: DE, ES: ES, FR: FR, IT: IT,
   PT: PT, TR: TR, BE: BE, NL: NL,
   HR: HR, CZ: CZ, RS: RS, NO: NO,
-  UA: UA, AT: AT, CH: CH, PL:PL, GB:GB , SK:SK
+  UA: UA, AT: AT, CH: CH
 };
 interface Team {
   id: number;
@@ -40,13 +39,11 @@ function flattenSchedule(schedule?: Record<string, ScheduleEntry[]>): ScheduleEn
   return out;
 }
 
-
-
 function resolveFlag(countryName?: string, width = 24, height = 16) {
-   if (!countryName || !COUNTRY_FLAGS[countryName]) return null;
-   const FlagComponent = COUNTRY_FLAGS[countryName];
+  if (!countryName || !COUNTRY_FLAGS[countryName]) return null;
+  const FlagComponent = COUNTRY_FLAGS[countryName];
   return <FlagComponent style={{ width, height, borderRadius: '3px', objectFit: 'cover', flexShrink: 0 }} />;
- }
+}
 // Fisher-Yates: torba içindeki topların DİZİLİŞİNİ (pozisyonunu) gerçek kura gibi karıştırır,
 // böylece "1. pozisyon hep Bayern" gibi ezbere bilinen bir sıra oluşmaz.
 function shuffle<T>(arr: T[]): T[] {
@@ -233,10 +230,10 @@ export default function DrawAllPage() {
               <div style={{ width: `${Math.round((drawnIds.length / totalTeams) * 100)}%`, height: '100%', background: 'linear-gradient(90deg,#fbbf24,#8b5cf6)', transition: 'width .3s' }} />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(420px, 1.3fr) 1fr', gap: '1.5rem', alignItems: 'start' }}>
+            <div className="drawall-drawing-grid">
 
               {/* Pot bowls with clickable balls */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="drawall-pot-grid">
                 {ballsByPot.map(({ potNum, teams }) => {
                   const pc = POT_COLORS[potNum];
                   const isActivePot = potNum === currentPot;
@@ -267,16 +264,17 @@ export default function DrawAllPage() {
                                 style={{
                                 width: '100%', minHeight: 64, borderRadius: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4,
                                 background: '#0b1340', border: `2px solid ${isActive ? pc.accent : 'rgba(255,255,255,0.12)'}`,
-                                 boxShadow: isActive ? `0 0 18px -2px ${pc.accent}` : 'inset 0 0 0 1px rgba(255,255,255,0.03)',
-                                 transition: 'all .25s',
-                                 cursor: 'pointer',
+                                boxShadow: isActive ? `0 0 18px -2px ${pc.accent}` : 'inset 0 0 0 1px rgba(255,255,255,0.03)',
+                                transition: 'all .25s',
+                                cursor: 'pointer',
                                 padding: '6px 4px',
                               }}
                               >
                                 {resolveFlag(team.country, 28, 19) || <div style={{ width: 28, height: 19, borderRadius: '3px', background: '#1e293b' }} />}
                                 <span style={{ color: '#e2e8f0', fontSize: '0.58rem', fontWeight: 700, textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%', lineHeight: 1.2 }}>
                                   {team.name}
-                               </span> </button>
+                                </span>
+                              </button>
                             );
                           }
                           // Boş kura topu — üzerinde isim/logo yok, tıklanana kadar takım gizli.
@@ -345,13 +343,13 @@ export default function DrawAllPage() {
                         </span>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', flex: 1, alignContent: 'start' }}>
+                      <div className="drawall-bigscreen-matches-grid">
                         {activeMatches.slice(0, visibleOpponentCount).map((m, i) => (
                           <div key={i} style={{
                             display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 12px', borderRadius: '12px',
                             background: 'rgba(255,255,255,0.05)', borderLeft: `3px solid ${m.isHome ? '#38bdf8' : '#f472b6'}`,
                           }}>
-                              {resolveFlag(m.opponent.country, 28, 19) || <div style={{ width: 28, height: 19, borderRadius: '3px', background: '#1e293b', flexShrink: 0 }} />}
+                            {resolveFlag(m.opponent.country, 28, 19) || <div style={{ width: 28, height: 19, borderRadius: '3px', background: '#1e293b', flexShrink: 0 }} />}
                             <div style={{ minWidth: 0 }}>
                               <div style={{ color: '#e2e8f0', fontSize: '0.82rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.opponent.name}</div>
                               <div style={{ fontSize: '0.65rem', color: m.isHome ? '#7dd3fc' : '#f9a8d4', fontWeight: 700 }}>{m.isHome ? 'EV SAHİBİ' : 'DEPLASMAN'}</div>
@@ -369,7 +367,7 @@ export default function DrawAllPage() {
 
         {/* ── RESULTS ── */}
         {stage === 'results' && result && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(320px, 1fr) 2fr', gap: '1.5rem', alignItems: 'start' }}>
+          <div className="drawall-results-grid">
 
             {/* Team selector grid */}
             <div style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(99,102,241,0.2)', background: 'rgba(2,10,40,0.85)', backdropFilter: 'blur(20px)' }}>
@@ -400,8 +398,7 @@ export default function DrawAllPage() {
                               color: '#fff',
                             }}
                           >
-                             {resolveFlag(team.country, 24, 16) || <div style={{ width: 24, height: 16, borderRadius: '3px', background: '#1e293b', flexShrink: 0 }} />}
-
+                            {resolveFlag(team.country, 24, 16) || <div style={{ width: 24, height: 16, borderRadius: '3px', background: '#1e293b', flexShrink: 0 }} />}
                             <span style={{ fontSize: '0.78rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{team.name}</span>
                           </button>
                         ))}
@@ -419,8 +416,7 @@ export default function DrawAllPage() {
                   {selectedTeam ? (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
                       <div style={{ width: 64, height: 64, borderRadius: '14px', overflow: 'hidden', background: '#1e3a8a', border: '2px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      {resolveFlag(selectedTeam.country, 48, 32)}
-
+                        {resolveFlag(selectedTeam.country, 48, 32)}
                       </div>
                       <div>
                         <h2 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#fff', margin: '0 0 0.25rem' }}>{selectedTeam.name}</h2>
@@ -431,7 +427,7 @@ export default function DrawAllPage() {
                     </div>
                   ) : <p style={{ color: '#94a3b8' }}>Bir takım seçin</p>}
                 </div>
-                <div style={{ padding: '1.75rem 2rem', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem' }}>
+                <div className="drawall-pot-detail-grid" style={{ padding: '1.75rem 2rem' }}>
                   {[1, 2, 3, 4].map((potNum) => {
                     const pc = POT_COLORS[potNum];
                     const opponents = selectedMatches.filter((m) => m.opponent.pot === potNum);
@@ -446,7 +442,8 @@ export default function DrawAllPage() {
                             <div key={i} style={{ borderRadius: '9px', padding: '7px 9px', background: 'rgba(255,255,255,0.04)', borderLeft: `3px solid ${m.isHome ? '#38bdf8' : '#f472b6'}` }}>
                               <div style={{ fontSize: '0.6rem', color: m.isHome ? '#7dd3fc' : '#f9a8d4', fontWeight: 700, marginBottom: '3px' }}>{m.isHome ? 'EV' : 'DEPLASMAN'}</div>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                 {resolveFlag(m.opponent.country, 20, 14) || <div style={{ width: 20, height: 14, borderRadius: '3px', background: '#1e293b' }} />}<span style={{ color: '#e2e8f0', fontSize: '0.74rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.opponent.name}</span>
+                                {resolveFlag(m.opponent.country, 20, 14) || <div style={{ width: 20, height: 14, borderRadius: '3px', background: '#1e293b' }} />}
+                                <span style={{ color: '#e2e8f0', fontSize: '0.74rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.opponent.name}</span>
                               </div>
                             </div>
                           )) : <p style={{ color: '#1e293b', fontSize: '0.7rem', textAlign: 'center', padding: '1rem 0', fontStyle: 'italic' }}>Rakip yok</p>}

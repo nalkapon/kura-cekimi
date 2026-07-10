@@ -69,6 +69,16 @@ export default function DrawAllPage() {
   const [drawingViewedTeamId, setDrawingViewedTeamId] = useState<number | null>(null);
   const advanceLockRef = useRef(false);
   const lastAnimatedTeamIdRef = useRef<number | null>(null);
+  const potSectionRef = useRef<HTMLDivElement | null>(null);
+  const liveScreenRef = useRef<HTMLDivElement | null>(null);
+
+  function scrollToLiveScreen() {
+    liveScreenRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function scrollToPots() {
+    potSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   async function fetchAndStart() {
     setLoading(true);
@@ -102,6 +112,7 @@ export default function DrawAllPage() {
     if (drawnIds.includes(team.id)) return;
     setDrawingViewedTeamId(team.id);
     setDrawnIds((prev) => [...prev, team.id]);
+    window.setTimeout(() => scrollToLiveScreen(), 80);
   }
 
   useEffect(() => {
@@ -233,7 +244,7 @@ export default function DrawAllPage() {
             <div className="drawall-drawing-grid">
 
               {/* Pot bowls with clickable balls */}
-              <div className="drawall-pot-grid">
+              <div className="drawall-pot-grid" ref={potSectionRef}>
                 {ballsByPot.map(({ potNum, teams }) => {
                   const pc = POT_COLORS[potNum];
                   const isActivePot = potNum === currentPot;
@@ -305,7 +316,7 @@ export default function DrawAllPage() {
               </div>
 
               {/* Big screen */}
-              <div style={{
+              <div ref={liveScreenRef} style={{
                 borderRadius: '24px', border: '10px solid #0a0a12', background: '#000',
                 boxShadow: '0 32px 80px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(99,102,241,0.25)',
                 overflow: 'hidden', minHeight: 480,
@@ -313,6 +324,24 @@ export default function DrawAllPage() {
                 <div style={{ background: 'linear-gradient(160deg,#020b2b 0%,#0e0420 100%)', padding: '2rem 2.25rem', minHeight: 480, display: 'flex', flexDirection: 'column' }}>
                   <div style={{ textAlign: 'center', color: '#475569', fontSize: '0.7rem', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
                     ● CANLI KURA EKRANI
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.85rem' }}>
+                    <button
+                      onClick={scrollToPots}
+                      style={{
+                        background: 'rgba(255,255,255,0.07)',
+                        border: '1px solid rgba(255,255,255,0.14)',
+                        color: '#cbd5e1',
+                        borderRadius: '9999px',
+                        padding: '6px 14px',
+                        fontSize: '0.75rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      ↑ Torbalara Dön
+                    </button>
                   </div>
 
                   {!activeTeam ? (

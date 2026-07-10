@@ -86,60 +86,75 @@ export default function WheelPage() {
   }, [options, segAngle]);
 
   return (
-    <div style={{ minHeight: '100vh', padding: '2rem 1.5rem', background: 'linear-gradient(160deg, #020b2b 0%, #0e0420 55%, #1a0635 100%)' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-
-        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'linear-gradient(135deg,rgba(250,204,21,0.1),rgba(99,102,241,0.1))', border: '1px solid rgba(250,204,21,0.22)', borderRadius: 9999, padding: '8px 28px', marginBottom: '1.5rem' }}>
-            <span style={{ color: '#fbbf24', fontSize: 13 }}>★</span>
-            <span style={{ color: '#bfdbfe', fontSize: 11, fontWeight: 800, letterSpacing: 3, textTransform: 'uppercase' }}>kuracek.com</span>
-            <span style={{ color: '#fbbf24', fontSize: 13 }}>★</span>
+    <div
+      className="min-h-screen bg-[#020b2b] px-3 py-4 sm:px-6 sm:py-8"
+      style={{ background: 'linear-gradient(160deg, #020b2b 0%, #0e0420 55%, #1a0635 100%)' }}
+    >
+      <div className="mx-auto w-full max-w-6xl">
+        <div className="mb-6 text-center sm:mb-10">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-gradient-to-r from-amber-300/10 to-indigo-400/10 px-4 py-1.5 sm:mb-6 sm:px-7 sm:py-2">
+            <span className="text-xs text-amber-300">★</span>
+            <span className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-blue-200 sm:text-xs">kuracek.com</span>
+            <span className="text-xs text-amber-300">★</span>
           </div>
-          <h1 style={{ fontSize: 'clamp(2rem,5vw,3.6rem)', fontWeight: 900, margin: '0 0 0.5rem', background: 'linear-gradient(135deg,#fff 0%,#bfdbfe 55%,#818cf8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+          <h1 className="mb-2 bg-gradient-to-r from-white via-blue-200 to-indigo-300 bg-clip-text text-4xl font-black leading-tight text-transparent sm:text-6xl">
             🎡 Çarkıfelek
           </h1>
-          <p style={{ color: '#93c5fd', fontSize: '0.95rem' }}>İsim ya da seçenek listeni gir, çarkı çevir, kazananı gör.</p>
+          <p className="mx-auto max-w-xl text-sm text-blue-300 sm:text-base">
+            İsim ya da seçenek listeni gir, çarkı çevir, kazananı gör.
+          </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px,1fr) 1.3fr', gap: '1.75rem', alignItems: 'start' }}>
-
-          {/* Left: input + list */}
-          <div style={{ borderRadius: 24, border: '1px solid rgba(99,102,241,0.2)', background: 'rgba(2,10,40,0.85)', backdropFilter: 'blur(20px)', overflow: 'hidden' }}>
-            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(99,102,241,0.15)' }}>
-              <h3 style={{ color: '#fff', fontWeight: 900, margin: 0, fontSize: '1.05rem' }}>Seçenekler</h3>
-              <p style={{ color: '#475569', fontSize: '0.78rem', margin: '4px 0 0' }}>Her satıra bir isim/seçenek yaz</p>
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(300px,1fr)_minmax(360px,1.3fr)] lg:items-start lg:gap-7">
+          <div className="order-2 overflow-hidden rounded-2xl border border-indigo-400/20 bg-[#020a28]/85 backdrop-blur-xl lg:order-1">
+            <div className="border-b border-indigo-400/20 px-4 py-4 sm:px-6 sm:py-5">
+              <h3 className="text-base font-black text-white sm:text-lg">Seçenekler</h3>
+              <p className="mt-1 text-xs text-slate-500">Her satıra bir isim/seçenek yaz</p>
             </div>
-            <div style={{ padding: '1.25rem 1.5rem' }}>
+            <div className="px-4 py-4 sm:px-6 sm:py-5">
               <textarea
                 value={rawInput}
                 onChange={(e) => setRawInput(e.target.value)}
                 rows={8}
-                style={{
-                  width: '100%', resize: 'vertical', borderRadius: 12, padding: '12px 14px', fontSize: '0.9rem',
-                  background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#e2e8f0',
-                  fontFamily: 'inherit', boxSizing: 'border-box',
-                }}
+                className="w-full resize-y rounded-xl border border-white/10 bg-white/5 px-3 py-3 text-sm text-slate-200 outline-none ring-0 placeholder:text-slate-400 focus:border-indigo-300/60"
               />
-              <div style={{ display: 'flex', gap: 10, marginTop: 12 }}>
-                <button onClick={applyInput} style={{ flex: 1, padding: '10px 14px', borderRadius: 10, border: '1px solid rgba(99,102,241,0.3)', background: 'rgba(99,102,241,0.14)', color: '#a5b4fc', fontWeight: 700, cursor: 'pointer' }}>
+
+              <div className="mt-3 flex gap-2">
+                <button
+                  onClick={applyInput}
+                  className="flex-1 rounded-xl border border-indigo-300/40 bg-indigo-400/20 px-3 py-2.5 text-sm font-bold text-indigo-200 transition hover:bg-indigo-400/30"
+                >
                   Listeyi Güncelle
                 </button>
-                <button onClick={reset} style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.1)', background: 'transparent', color: '#94a3b8', fontWeight: 700, cursor: 'pointer' }}>
+                <button
+                  onClick={reset}
+                  className="rounded-xl border border-white/15 px-3 py-2.5 text-sm font-bold text-slate-300 transition hover:bg-white/10"
+                >
                   Sıfırla
                 </button>
               </div>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 16, color: '#94a3b8', fontSize: '0.85rem', cursor: 'pointer' }}>
-                <input type="checkbox" checked={removeWinner} onChange={(e) => setRemoveWinner(e.target.checked)} />
+              <label className="mt-4 flex cursor-pointer items-center gap-2 text-sm text-slate-300">
+                <input
+                  type="checkbox"
+                  checked={removeWinner}
+                  onChange={(e) => setRemoveWinner(e.target.checked)}
+                  className="h-4 w-4 rounded border-slate-500 bg-slate-900 text-indigo-400"
+                />
                 Kazananı çarktan çıkar
               </label>
 
               {history.length > 0 && (
-                <div style={{ marginTop: '1.5rem' }}>
-                  <div style={{ color: '#e2e8f0', fontSize: '0.8rem', fontWeight: 700, marginBottom: 8 }}>Geçmiş Kazananlar</div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <div className="mt-6">
+                  <div className="mb-2 text-xs font-bold text-slate-200">Geçmiş Kazananlar</div>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {history.map((h, i) => (
-                      <span key={i} style={{ background: 'rgba(251,191,36,0.12)', border: '1px solid rgba(251,191,36,0.3)', color: '#fbbf24', padding: '4px 12px', borderRadius: 9999, fontSize: '0.72rem', fontWeight: 700 }}>{h}</span>
+                      <span
+                        key={i}
+                        className="rounded-full border border-amber-300/35 bg-amber-300/10 px-2.5 py-1 text-[11px] font-bold text-amber-300 sm:px-3 sm:text-xs"
+                      >
+                        {h}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -147,30 +162,29 @@ export default function WheelPage() {
             </div>
           </div>
 
-          {/* Right: wheel */}
-          <div style={{ borderRadius: 24, border: '1px solid rgba(99,102,241,0.2)', background: 'rgba(2,10,40,0.85)', backdropFilter: 'blur(20px)', padding: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ position: 'relative', width: 'min(420px, 90vw)', height: 'min(420px, 90vw)' }}>
-              {/* Pointer */}
-              <div style={{
-                position: 'absolute', top: -6, left: '50%', transform: 'translateX(-50%)', zIndex: 2,
-                width: 0, height: 0, borderLeft: '14px solid transparent', borderRight: '14px solid transparent',
-                borderTop: '26px solid #fbbf24', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))',
-              }} />
+          <div className="order-1 flex flex-col items-center rounded-2xl border border-indigo-400/20 bg-[#020a28]/85 px-3 py-4 backdrop-blur-xl sm:px-6 sm:py-8 lg:order-2">
+            <div className="relative h-[min(88vw,420px)] w-[min(88vw,420px)]">
+              <div
+                className="pointer-events-none absolute left-1/2 top-0 z-20 h-0 w-0 -translate-x-1/2 -translate-y-1 border-x-[12px] border-x-transparent border-t-[22px] border-t-amber-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] sm:border-x-[14px] sm:border-t-[26px]"
+              />
+
               <div
                 ref={wheelRef}
+                className="relative h-full w-full overflow-hidden rounded-full border-[5px] border-[#0b1340] shadow-[0_0_0_2px_rgba(251,191,36,0.35),0_20px_50px_-20px_rgba(0,0,0,0.6)] sm:border-[6px]"
                 style={{
-                  width: '100%', height: '100%', borderRadius: '50%', background: gradient,
-                  border: '6px solid #0b1340', boxShadow: '0 0 0 2px rgba(251,191,36,0.35), 0 30px 70px -20px rgba(0,0,0,0.6)',
-                  position: 'relative', overflow: 'hidden',
+                  background: gradient,
                   transform: `rotate(${rotation}deg)`,
                   transition: spinning ? 'transform 4.1s cubic-bezier(0.17, 0.67, 0.12, 1)' : 'none',
                 }}
               >
                 {options.map((opt, i) => {
                   const angle = i * segAngle + segAngle / 2;
-                  // distance from center in px where label should sit (responsive)
-                  // place label near the middle of the wedge (closer to center)
-                  const dist = Math.max(40, Math.round(radiusPx * 0.38));
+                  const segAngleRad = (segAngle * Math.PI) / 180 || 0.0001;
+                  const centroidRatio = (4 * Math.sin(segAngleRad / 2)) / (3 * segAngleRad);
+                  const dist = Math.max(22, Math.round(radiusPx * Math.max(0.32, Math.min(centroidRatio, 0.8))));
+                  const labelWidth = Math.max(52, Math.round(2 * dist * Math.sin(segAngleRad / 2) * 0.86));
+                  const labelFont = `${Math.max(10, Math.min(16, Math.round(radiusPx * 0.055)))}px`;
+
                   return (
                     <div
                       key={i}
@@ -178,66 +192,62 @@ export default function WheelPage() {
                         position: 'absolute',
                         left: '50%',
                         top: '50%',
-                        transform: `translate(-50%,-50%) rotate(${angle}deg) translate(0, -${dist}px)`,
-                         transformOrigin: 'center center',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                        transform: `translate(-50%, -50%) rotate(${angle}deg) translate(0, -${dist}px)`,
+                        transformOrigin: 'center center',
                         pointerEvents: 'none',
                       }}
                     >
-                      <span style={{
-                        display: 'inline-block',
-                        transform: `rotate(${-angle}deg)`,
-                        transformOrigin: 'center',
-                        fontSize: options.length > 12 ? 10 : 13,
-                        fontWeight: 800,
-                        color: pickTextColor(),
-                        // limit width so label stays within slice center area
-                        maxWidth: Math.max(64, Math.round(radiusPx * 0.5)),
-                        padding: '0 4px',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        textAlign: 'center',
-                      }}>{opt}</span>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          width: `${labelWidth}px`,
+                          transform: `translateX(-50%) rotate(${-angle}deg)`,
+                          transformOrigin: 'center',
+                          fontSize: labelFont,
+                          fontWeight: 800,
+                          color: pickTextColor(),
+                          textAlign: 'center',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          textShadow: '0 1px 0 rgba(255,255,255,0.2)',
+                        }}
+                      >
+                        {opt}
+                      </span>
                     </div>
                   );
                 })}
               </div>
-              <div style={{
-                position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
-                width: 56, height: 56, borderRadius: '50%', background: '#0b1340', border: '3px solid #fbbf24',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px -4px rgba(251,191,36,0.6)', zIndex: 1,
-              }}>
-                <span style={{ fontSize: 22 }}>🎯</span>
+
+              <div className="absolute left-1/2 top-1/2 z-10 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-amber-300 bg-[#0b1340] shadow-[0_0_18px_-4px_rgba(251,191,36,0.6)] sm:h-14 sm:w-14 sm:border-[3px]">
+                <span className="text-xl sm:text-2xl">🎯</span>
               </div>
             </div>
 
             <button
               onClick={spin}
               disabled={spinning || options.length < 2}
+              className="mt-6 rounded-xl px-6 py-3 text-sm font-black text-white transition sm:mt-8 sm:px-10 sm:text-base"
               style={{
-                marginTop: '2rem', padding: '14px 48px', fontSize: '1rem', fontWeight: 900, borderRadius: 14,
                 border: (spinning || options.length < 2) ? '1px solid #1e293b' : '1px solid rgba(250,204,21,0.3)',
                 background: (spinning || options.length < 2) ? '#1e293b' : 'linear-gradient(135deg,#1d4ed8 0%,#4338ca 100%)',
                 color: (spinning || options.length < 2) ? '#475569' : '#fff',
                 cursor: (spinning || options.length < 2) ? 'not-allowed' : 'pointer',
                 boxShadow: (spinning || options.length < 2) ? 'none' : '0 0 40px -8px rgba(99,102,241,0.65)',
               }}
-            >{spinning ? '🎡 Çark Dönüyor...' : '🎡 Çarkı Çevir'}</button>
+            >
+              {spinning ? '🎡 Çark Dönüyor...' : '🎡 Çarkı Çevir'}
+            </button>
 
             {options.length < 2 && (
-              <p style={{ color: '#f87171', fontSize: '0.8rem', marginTop: 10 }}>Çevirmek için en az 2 seçenek gerekli.</p>
+              <p className="mt-2 text-center text-xs text-red-400 sm:text-sm">Çevirmek için en az 2 seçenek gerekli.</p>
             )}
 
             {winner && !spinning && (
-              <div style={{
-                marginTop: '1.75rem', textAlign: 'center', padding: '1rem 2rem', borderRadius: 16,
-                background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.35)',
-              }}>
-                <div style={{ color: '#93c5fd', fontSize: '0.7rem', fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase' }}>Kazanan</div>
-                <div style={{ color: '#fbbf24', fontSize: '1.6rem', fontWeight: 900, marginTop: 4 }}>{winner}</div>
+              <div className="mt-6 rounded-2xl border border-amber-300/40 bg-amber-300/10 px-5 py-4 text-center sm:mt-7 sm:px-8">
+                <div className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-blue-300 sm:text-xs">Kazanan</div>
+                <div className="mt-1 text-2xl font-black text-amber-300 sm:text-3xl">{winner}</div>
               </div>
             )}
           </div>

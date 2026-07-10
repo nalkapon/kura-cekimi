@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { drawAPI } from '../services/api';
-import { GB, DE, ES, FR, IT, PT, TR, BE, NL, HR, CZ, RS, NO, UA, AT, CH } from 'country-flag-icons/react/3x2';
+import { GB, DE, ES, FR, IT, PT, TR, BE, NL, HR, CZ, RS, NO, UA, AT, CH, PL, SK} from 'country-flag-icons/react/3x2';
 
 const COUNTRY_FLAGS: Record<string, any> = {
   EN: GB, DE: DE, ES: ES, FR: FR, IT: IT,
   PT: PT, TR: TR, BE: BE, NL: NL,
   HR: HR, CZ: CZ, RS: RS, NO: NO,
-  UA: UA, AT: AT, CH: CH
+  UA: UA, AT: AT, CH: CH, PL:PL, GB:GB , SK:SK
 };
 interface Team {
   id: number;

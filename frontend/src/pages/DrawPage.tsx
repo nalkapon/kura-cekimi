@@ -120,7 +120,7 @@ export default function DrawPage() {
   ] as any[];
 
   return (
-    <div style={{ minHeight: '100vh', padding: '2rem 1.5rem', background: 'linear-gradient(160deg, #020b2b 0%, #0e0420 55%, #1a0635 100%)' }}>
+    <div style={{ minHeight: '100vh', padding: 'clamp(0.75rem, 2.5vw, 2rem) clamp(0.5rem, 2.5vw, 1.5rem)', background: 'linear-gradient(160deg, #020b2b 0%, #0e0420 55%, #1a0635 100%)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
 
         {/* ── HEADER ── */}
@@ -179,7 +179,7 @@ export default function DrawPage() {
           <div style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(99,102,241,0.3)', background: 'rgba(2,10,40,0.9)', backdropFilter: 'blur(20px)', boxShadow: '0 32px 80px -24px rgba(59,130,246,0.4)' }}>
 
             {/* Hero header */}
-            <div style={{ background: 'linear-gradient(135deg,#0f1f6e 0%,#0c0a2e 100%)', padding: '2.5rem', borderBottom: '1px solid rgba(99,102,241,0.2)' }}>
+            <div style={{ background: 'linear-gradient(135deg,#0f1f6e 0%,#0c0a2e 100%)', padding: 'clamp(1rem, 3.5vw, 2.5rem)', borderBottom: '1px solid rgba(99,102,241,0.2)' }}>
               <button
                 onClick={() => setSimulationMode(false)}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', color: '#e2e8f0', padding: '10px 22px', borderRadius: '9999px', cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, marginBottom: '2rem', transition: 'all .15s' }}
@@ -202,7 +202,7 @@ export default function DrawPage() {
             </div>
 
             {/* Match plan */}
-            <div style={{ padding: '2rem 2.5rem 2.5rem' }}>
+            <div style={{ padding: 'clamp(0.75rem, 3vw, 2rem) clamp(0.75rem, 3vw, 2.5rem) clamp(1rem, 3vw, 2.5rem)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
                 <h3 style={{ fontSize: 'clamp(1.5rem,3vw,2.25rem)', fontWeight: 900, color: '#fff', margin: 0 }}>Maç Planı</h3>
                 <span style={{ background: 'rgba(99,102,241,0.14)', border: '1px solid rgba(99,102,241,0.3)', color: '#a5b4fc', padding: '8px 20px', borderRadius: '9999px', fontSize: '0.875rem', fontWeight: 700 }}>
@@ -210,7 +210,7 @@ export default function DrawPage() {
                 </span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem' }}>
+              <div className="drawpage-match-grid" style={{ gap: '0.8rem' }}>
                 {[1, 2, 3, 4].map((potNum) => {
                   const pc = POT_COLORS[potNum];
                   const potOpponents = selectedTeamMatches.slice(0, visibleOpponentCount).filter((m: any) => m.pot === potNum);
@@ -258,7 +258,7 @@ export default function DrawPage() {
               <span style={{ background: 'linear-gradient(135deg,#fbbf24,#f59e0b)', color: '#000', fontWeight: 900, fontSize: '0.72rem', padding: '6px 18px', borderRadius: '9999px', letterSpacing: '1px', textTransform: 'uppercase' }}>36 Takım</span>
             </div>
 
-            <div style={{ padding: '1.5rem 2rem 2rem', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1.25rem' }}>
+            <div className="drawpage-team-grid" style={{ padding: 'clamp(0.75rem, 2.5vw, 1.5rem) clamp(0.75rem, 2.5vw, 2rem) clamp(1rem, 2.5vw, 2rem)', gap: '0.8rem' }}>
               {teamsByPot.map(({ potNum, teams }) => {
                 const pc = POT_COLORS[potNum];
                 return (

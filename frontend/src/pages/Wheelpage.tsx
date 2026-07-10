@@ -91,7 +91,7 @@ export default function WheelPage() {
         <div className="wheel-hero">
           <div className="wheel-pill">
             <span>★</span>
-            <span>kuracek.com</span>
+            <span>kuracekimi.com</span>
             <span>★</span>
           </div>
           <h1>🎡 Çarkıfelek</h1>

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { drawAPI } from '../services/api';
-import { GB, DE, ES, FR, IT, PT, TR, BE, NL, HR, CZ, RS, NO, UA, AT, CH, PL, SK} from 'country-flag-icons/react/3x2';
-
+import type { CompetitionConfig } from '../data/competitions';
+import { GB, DE, ES, FR, IT, PT, TR, BE, NL, HR, CZ, RS, NO, UA, AT, CH, PL, SK, GR, IL,HU,SI,CY,AZ,RO,BG} from 'country-flag-icons/react/3x2';
 
 const COUNTRY_FLAGS: Record<string, any> = {
-  EN: GB, DE: DE, ES: ES, FR: FR, IT: IT,
-  PT: PT, TR: TR, BE: BE, NL: NL,
-  HR: HR, CZ: CZ, RS: RS, NO: NO,
-  UA: UA, AT: AT, CH: CH, PL:PL, GB:GB , SK:SK
+  EN: GB, DE: DE, ES: ES, FR: FR, IT: IT, HU: HU,
+  PT: PT, TR: TR, BE: BE, NL: NL, SI:SI, CY:CY,
+  HR: HR, CZ: CZ, RS: RS, NO: NO,AZ:AZ, RO:RO, BG:BG,
+  UA: UA, AT: AT, CH: CH, PL:PL, GB:GB , GR:GR, IL:IL, SK:SK
 };
 function resolveFlag(countryName?: string, width = 24, height = 16) {
   if (!countryName || !COUNTRY_FLAGS[countryName]) return null;
@@ -33,7 +33,7 @@ interface DrawResult {
   totalMatches: number;
 }
 
-export default function DrawPage() {
+export default function DrawPage({ competition }: { competition?: CompetitionConfig } = {}) {
   const [result, setResult] = useState<DrawResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -48,7 +48,7 @@ export default function DrawPage() {
     setSelectedTeamId(null);
 
     try {
-      const data = await drawAPI.swiss();
+      const data = await drawAPI.swiss(competition?.slug);
       setResult(data);
     } catch (err: any) {
       setError(err.response?.data?.error || 'İsviçre Sistemi kura çekimi başarısız oldu.');
@@ -127,14 +127,14 @@ export default function DrawPage() {
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'linear-gradient(135deg,rgba(250,204,21,0.1),rgba(99,102,241,0.1))', border: '1px solid rgba(250,204,21,0.22)', borderRadius: '9999px', padding: '8px 28px', marginBottom: '1.5rem' }}>
             <span style={{ color: '#fbbf24', fontSize: '13px' }}>★</span>
-            <span style={{ color: '#bfdbfe', fontSize: '11px', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase' }}>UEFA Şampiyonlar Ligi</span>
+            <span style={{ color: '#bfdbfe', fontSize: '11px', fontWeight: 800, letterSpacing: '3px', textTransform: 'uppercase' }}>{competition?.name || 'UEFA Şampiyonlar Ligi'}</span>
             <span style={{ color: '#fbbf24', fontSize: '13px' }}>★</span>
           </div>
           <h1 style={{ fontSize: 'clamp(2rem, 5.5vw, 4.5rem)', fontWeight: 900, lineHeight: 1.1, margin: '0 0 1.5rem', background: 'linear-gradient(135deg,#fff 0%,#bfdbfe 55%,#818cf8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-            ⚽ İsviçre Sistemi Kurası
+            {competition?.emoji || '⚽'} İsviçre Sistemi Kurası
           </h1>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '2.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
-            {[['36', 'Takım'], ['144', 'Toplam Maç'], ['2', 'Torba Başına Rakip']].map(([val, lbl]) => (
+            {[[String(result?.teams.length || 36), 'Takım'], [String(result?.totalMatches || 144), 'Toplam Maç'], ['2', 'Torba Başına Rakip']].map(([val, lbl]) => (
               <div key={lbl} style={{ textAlign: 'center', minWidth: '72px' }}>
                 <div style={{ fontSize: '2rem', fontWeight: 900, color: '#fbbf24', lineHeight: 1 }}>{val}</div>
                 <div style={{ fontSize: '0.65rem', color: '#93c5fd', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: '5px' }}>{lbl}</div>
@@ -255,7 +255,7 @@ export default function DrawPage() {
                 <h3 style={{ fontSize: '1.6rem', fontWeight: 900, color: '#fff', margin: '0 0 0.3rem' }}>Takım Seçimi</h3>
                 <p style={{ color: '#475569', fontSize: '0.82rem', margin: 0 }}>Maçlarını görmek için bir takım seçin</p>
               </div>
-              <span style={{ background: 'linear-gradient(135deg,#fbbf24,#f59e0b)', color: '#000', fontWeight: 900, fontSize: '0.72rem', padding: '6px 18px', borderRadius: '9999px', letterSpacing: '1px', textTransform: 'uppercase' }}>36 Takım</span>
+              <span style={{ background: 'linear-gradient(135deg,#fbbf24,#f59e0b)', color: '#000', fontWeight: 900, fontSize: '0.72rem', padding: '6px 18px', borderRadius: '9999px', letterSpacing: '1px', textTransform: 'uppercase' }}>{result.teams.length} Takım</span>
             </div>
 
             <div className="drawpage-team-grid" style={{ padding: 'clamp(0.75rem, 2.5vw, 1.5rem) clamp(0.75rem, 2.5vw, 2rem) clamp(1rem, 2.5vw, 2rem)', gap: '0.8rem' }}>

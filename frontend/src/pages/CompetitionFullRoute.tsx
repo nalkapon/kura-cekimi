@@ -9,7 +9,7 @@ export default function CompetitionFullRoute() {
   const competition = getCompetition(slug);
 
   if (competition?.active) {
-    return <DrawAllPage />;
+    return <DrawAllPage competition={competition} />;
   }
   return <ComingSoonPage />;
 }

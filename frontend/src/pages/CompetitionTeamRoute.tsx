@@ -11,7 +11,7 @@ export default function CompetitionTeamRoute() {
   const competition = getCompetition(slug);
 
   if (competition?.active) {
-    return <DrawPage />;
+    return <DrawPage competition={competition} />;
   }
   return <ComingSoonPage />;
 }

@@ -33,7 +33,7 @@ export const COMPETITIONS: CompetitionConfig[] = [
     accentSoft: 'rgba(251,146,60,0.14)',
     border: 'rgba(251,146,60,0.35)',
     description: 'UEFA Avrupa Ligi lig fazı kurası.',
-    active: false,
+    active: true,
     teamCount: 36,
   },
   {
